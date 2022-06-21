@@ -21,7 +21,7 @@
         </rowConstraints>
          <children>
             <Label text="Buscar y mostrar imagen" />
-            <Button fx:id="btnBuscar1" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Buscar" textAlignment="CENTER" GridPane.columnIndex="1" />
+            <Button fx:id="btnBuscar" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Buscar" textAlignment="CENTER" GridPane.columnIndex="1" />
             <ImageView fx:id="ivImagen" fitHeight="322.0" fitWidth="593.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1" />
          </children>
       </GridPane>

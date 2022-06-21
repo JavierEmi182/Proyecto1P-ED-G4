@@ -59,7 +59,7 @@ public class Album {
     }
     
     public boolean eliminarImagen(Photo foto){
-       /*for(Photo f:fotos){   //revisar el iterable
+       for(Photo f:fotos){   //revisar el iterable
             if(f.equals(foto)){
                 int i=fotos.getIndex(f);
                 fotos.remove(i);
@@ -68,5 +68,5 @@ public class Album {
         }
         return false;
     }
-    */return false;}
+    //return false;}
 }

@@ -23,7 +23,7 @@ import javafx.stage.FileChooser;
 public class FileChooserController implements Initializable {
 
     @FXML
-    private Button btnBuscar1;
+    private Button btnBuscar;
     @FXML
     private ImageView ivImagen;
 
@@ -33,7 +33,7 @@ public class FileChooserController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        btnBuscar1.setOnAction(event -> {
+        btnBuscar.setOnAction(event -> {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Buscar Imagen");
 

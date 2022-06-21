@@ -5,7 +5,7 @@ import java.util.Iterator;
 
 // estudiante Javier Vergara
 
-public class DoubleCircularLinkedList<E> implements Iterable, List<E>  {
+public class DoubleCircularLinkedList<E> implements Iterable<E>, List<E>  {
 
     private NodeList<E> first;
     private NodeList<E> last;

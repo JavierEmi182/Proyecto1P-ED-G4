@@ -88,15 +88,15 @@ public class Photo {
     }
     
     public boolean eliminarPersona(String eliminado){
-       /* for(String p:personas){    //tengo que revisar este error con el iterable
+        for(String p:personas){    //tengo que revisar este error con el iterable
             if(p.equals(eliminado)){
                 int i = personas.getIndex(p);
                 personas.remove(i);
                 return true;
         }
     }
-            return false;  //no se encontro dicha persona*/
-       return false; 
+            return false;  //no se encontro dicha persona
+     //  return false; 
     }
     
     public void agregarFavoritos(){
