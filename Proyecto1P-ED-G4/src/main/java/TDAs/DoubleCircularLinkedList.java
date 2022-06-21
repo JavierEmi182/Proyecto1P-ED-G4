@@ -139,23 +139,26 @@ public class DoubleCircularLinkedList<E> implements Iterable<E>, List<E>  {
         int size =size();
         if (element==null || index<0 || index>size)
             System.out.println("No se puede realizar dicha acción");
-        if (index==0){
+        else if (index==0){
             addFirst(element);
         }
-        if(index==size){
+        else if(index==size){
             addLast(element);
-        }
+        }else{
         
         int i=0;
         NodeList<E> nuevo =  new NodeList<>(element);
         
         for (NodeList<E> n=first; n != null; n = n.getNext()) {
             if(i==index-1){
-                nuevo.setNext(n.getNext());
-                n.setNext(nuevo);
-                size++;
+                NodeList<E> n1= n.getNext();  //donde añado
+                nuevo.setNext(n1);        //seteo como siguiente n1 en nuevo
+                nuevo.setPrevious(n);      //seteo como anterior n en nuevo
+                n1.setPrevious(nuevo);         //seteo como anterior de n1 el nuevo
+                n.setNext(nuevo);          //seteo como el siguiente de n el nuevo
+                i++;
             }
-        }
+        }}
     }
 
     @Override
@@ -176,8 +179,11 @@ public class DoubleCircularLinkedList<E> implements Iterable<E>, List<E>  {
                         int i =0;
                     for (NodeList<E> n=first; n != null; n = n.getNext()) {
                         if(i==index-1){
-                        E e =n.getNext().getContent();
-                        n.setNext(n.getNext().getNext());;
+                        E e =n.getNext().getContent();    //guardo el contenido del eliminado
+                        NodeList<E> eliminado = n.getNext();   //guardo el eliminado ennodo
+                        n.setNext(eliminado.getNext());         //seteo como siguiente el siguiente del eliminado
+                        eliminado.getNext().setPrevious(n);    //seteo como el anterior del sgt del eliminado a n
+
                         i++;
                         return e;
     		}
@@ -195,7 +201,7 @@ public class DoubleCircularLinkedList<E> implements Iterable<E>, List<E>  {
             System.out.println("Lista vacia");
             return null;
         }
-        if(index>=size){
+        else if(index>=size){
             System.out.println("Valor fuera de los limites");
             return null;
         }
@@ -205,8 +211,9 @@ public class DoubleCircularLinkedList<E> implements Iterable<E>, List<E>  {
                 return n.getContent();
             }
         }
-        return null;
-    }}
+        
+    }return null;
+    }
 
     @Override
     public E set(int index, E element) {
