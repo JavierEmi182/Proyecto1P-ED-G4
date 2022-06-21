@@ -1,9 +1,11 @@
 package TDAs;
 
+import java.util.Iterator;
+
 
 // estudiante Javier Vergara
 
-public class DoubleCircularLinkedList<E> implements List<E> {
+public class DoubleCircularLinkedList<E> implements Iterable, List<E>  {
 
     private NodeList<E> first;
     private NodeList<E> last;
@@ -227,6 +229,17 @@ public class DoubleCircularLinkedList<E> implements List<E> {
         }
         return null;  
     }}
+    
+    public int getIndex(E e){
+        int i=0;
+        for(NodeList<E> n=first;n !=null;n=n.getNext()){
+            if(n.equals(e)){
+                return i;
+            }
+            i++;
+        }
+        return i;
+    }
 
     @Override
     public String toString() {
@@ -237,5 +250,25 @@ public class DoubleCircularLinkedList<E> implements List<E> {
         }
         return s;
     }
+
+    @Override
+    public  Iterator<E> iterator() {
+        Iterator<E> it = new Iterator<E>(){
+            NodeList<E> cursor=first;
+            @Override
+            public boolean hasNext() {
+                return cursor!=last;
+            }
+
+            @Override
+            public E next() {
+                E e =cursor.getContent();
+                cursor =cursor.getNext();
+                return e;  //retorno el anterior
+            }
+
+        };
+        return it;      
+    };
 
 }
