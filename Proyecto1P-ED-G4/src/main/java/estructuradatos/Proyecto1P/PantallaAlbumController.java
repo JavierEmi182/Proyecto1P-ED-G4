@@ -8,6 +8,7 @@ package estructuradatos.Proyecto1P;
 import Classes.Album;
 import Classes.Photo;
 import TDAs.DoubleCircularLinkedList;
+import TDAs.NodeList;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -42,18 +43,64 @@ public class PantallaAlbumController implements Initializable {
         try {
             Photo girasol = new Photo("girasol.jpg",null,"Es un girasol");
             Photo mariposa = new Photo("mariposa.jpg",null,"Es un mariposa");
-
+            Photo foco = new Photo("foco.jpg",null,"Es un foco");
+            //System.out.println("cargo escena");
             DoubleCircularLinkedList<Photo> fotos = new DoubleCircularLinkedList<>();
+            //System.out.println("1");
             fotos.addFirst(girasol);
+            //System.out.println(fotos);
             fotos.addFirst(mariposa);
+            //System.out.println(fotos);
+            fotos.addFirst(foco);
+            /*System.out.println(fotos);
+            System.out.println("2");
+            System.out.println("El tamaño es: "+fotos.size());*/
+            VBox vboxmenu = new VBox();
+            /*System.out.println();
+            System.out.println("primero:");
+            System.out.println(fotos.getFirst().getContent());
+            System.out.println(fotos.getFirst().getPrevious().getContent());
+            System.out.println();
+             System.out.println("segundo:");
+            System.out.println(fotos.getFirst().getNext().getContent());
+            System.out.println(fotos.getFirst().getNext().getNext().getContent());
+            System.out.println(fotos.getFirst().getNext().getPrevious().getContent());
+            System.out.println();
+             System.out.println("tercero:");
+            System.out.println(fotos.getLast().getContent());
+            System.out.println(fotos.getLast().getNext().getContent());
+            System.out.println(fotos.getLast().getPrevious().getContent());*/
+            //int i= 0;
+            //for(NodeList<Photo> p= fotos.getFirst();p !=fotos.getLast();p.getNext()){
+            
+            
+          /*  ESTE FOR RECORRE TODO
+            NodeList<Photo> p = fotos.getFirst();
+            for(int i=0; i<fotos.size();i++){
+                
+                System.out.println("*");
+                System.out.println(p.getContent());
+                p=p.getNext();
+            }
+            */
+            
+            
+            
+          /*  for (Photo p1 :fotos){  ESTE FOR EACH DE PRUEBA
+                System.out.println("Entre for each");
+                System.out.println(p1);
+            }*/
+            
             for (Photo p :fotos){
-               VBox vboxmenu = new VBox();
+           // for(NodeList<Photo> p= fotos.getFirst();f ==fotos.getLast();f.next()){
+               System.out.println("*");
                vboxmenu.setAlignment(Pos.CENTER);
                //la imagen
                System.out.println(p.getRuta());
                System.out.println("Ruta " +App.class.getResource(""));
-                InputStream inputImg= App.class.getResource("/"+p.getRuta()).openStream();
-                ImageView imgv = new ImageView(new Image(inputImg));
+               InputStream inputImg= App.class.getResource("/fotoss/"+p.getRuta()).openStream();
+               ImageView imgv = new ImageView(new Image(inputImg));
+             //   ImageView imgv = new ImageView(new Image(getClass().getResourceAsStream("/fotoss/"+p.getRuta())));
                 vboxmenu.getChildren().add(imgv);
                 
                 //el nombre de la pelicula
@@ -62,13 +109,11 @@ public class PantallaAlbumController implements Initializable {
                 vboxmenu.getChildren().add(lnombre);
                 //anio
                 Label lprecio = new Label(String.valueOf(p.getFecha()));
-                 vboxmenu.getChildren().add(lprecio);
-                  vboxmenu.setPadding(new Insets(2,3,3,4));
-                  
-               fpEspacio.getChildren().add(vboxmenu);
-               
+                vboxmenu.getChildren().add(lprecio);
+                vboxmenu.setPadding(new Insets(2,3,3,4));
+                System.out.println("***");
             }
-            
+            fpEspacio.getChildren().add(vboxmenu);
             //si el archivo de pedido es diferente de null se lo carga
         } catch (IOException ex) {
             System.out.println("algo paso");

@@ -35,9 +35,9 @@ public class App extends Application {
         try {
            // FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("FileChooser.fxml"));  
            
-           FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/FileChooser.fxml"));
+           //FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/FileChooser.fxml"));
            
-           //FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/PantallaAlbum.fxml"));
+           FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/PantallaAlbum.fxml"));
             
             //FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/"+getClass().getCanonicalName().replaceAll(".", "/").replaceAll("Controller", "")+"fxml"));
             //fxmlLoader.setLocation(App.class.getResource("/src/fxml/FileChooser.fxml"));
@@ -48,7 +48,7 @@ public class App extends Application {
             System.out.println("location:"+fxmlLoader.getLocation());
             Parent root = fxmlLoader.load();
             //fxmlLoader.
-            System.out.println("Esto no se completo");
+            //System.out.println("Esto no se completo");
             //System.out.println(root);
             //cree el scene y fije como nodo raiz el objeto que cargo con el fxml
             scene = new Scene(root);

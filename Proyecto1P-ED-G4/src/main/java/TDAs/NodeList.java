@@ -1,9 +1,9 @@
 package TDAs;
 
-class NodeList<E> {
-    private E content;
-    private NodeList<E> next;
-    private NodeList<E> previous;
+public class NodeList<E> {
+    public E content;
+    public NodeList<E> next;
+    public NodeList<E> previous;
 
     public NodeList(E content) {
         this.content = content;
@@ -33,5 +33,9 @@ class NodeList<E> {
         this.previous = previous;
     }
     
+    public boolean equals(NodeList<E> nl){
+            return this.getContent().equals(nl.getContent());
+        
+    }
     
 }

@@ -102,4 +102,16 @@ public class Photo {
     public void agregarFavoritos(){
         setFavorita(true);
     }
+    
+    @Override
+    public String toString() {
+        String s = "";
+        
+        return this.ruta.substring(0,ruta.length()-4);
+    }
+    
+    public boolean equals(Photo foto2){
+            return this.ruta.substring(0,ruta.length()-4).equals(foto2.ruta.substring(0,ruta.length()-4));
+        
+    }
 }
