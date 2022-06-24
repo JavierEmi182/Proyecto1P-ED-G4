@@ -73,11 +73,15 @@ public class Photo {
     
     //constructor
 
-    public Photo(String ruta, DoubleCircularLinkedList<String> personas, String lugar) {
+    public Photo(String ruta, DoubleCircularLinkedList<String> personas, String lugar, String info,int i) {
         this.ruta = ruta;
         this.personas = personas;
         this.lugar = lugar;
         this.fecha=LocalDate.now();
+        this.info=info;
+        if(i==1){
+            this.favorita=true;
+        }
     }
     
     

@@ -7,6 +7,7 @@ package estructuradatos.Proyecto1P;
 
 import Classes.Album;
 import Classes.Photo;
+import static Data.fotosData.leerFotos;
 import TDAs.DoubleCircularLinkedList;
 import TDAs.NodeList;
 import java.io.IOException;
@@ -14,12 +15,17 @@ import java.io.InputStream;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollBar;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
@@ -33,7 +39,7 @@ import javafx.scene.layout.VBox;
 public class PantallaAlbumController implements Initializable {
 
     @FXML
-    private FlowPane fpEspacio;
+    private ScrollPane fpEspacio;
 
     /**
      * Initializes the controller class.
@@ -41,20 +47,33 @@ public class PantallaAlbumController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        Photo girasol = new Photo("girasol.jpg",null,"Es un girasol");
+        /*Photo girasol = new Photo("girasol.jpg",null,"Es un girasol");
         Photo mariposa = new Photo("mariposa.jpg",null,"Es un mariposa");
-        Photo foco = new Photo("foco.jpg",null,"Es un foco");
+        Photo foco = new Photo("foco.jpg",null,"Es un foco");*/
         //System.out.println("cargo escena");
-        DoubleCircularLinkedList<Photo> fotos = new DoubleCircularLinkedList<>();
+        //DoubleCircularLinkedList<Photo> fotos;
+        try {
+            //System.out.println("Entre al pantallaAlbumController");
+            //System.out.println(leerFotos("fotosUsuario.txt"));
+            DoubleCircularLinkedList<Photo> fotos = leerFotos("/archivos/fotosUsuario.txt");
+            System.out.println(fotos);
+        
         //System.out.println("1");
-        fotos.addFirst(girasol);
+        //fotos.addFirst(girasol);
         //System.out.println(fotos);
-        fotos.addFirst(mariposa);
+        //fotos.addFirst(mariposa);
         //System.out.println(fotos);
-        fotos.addFirst(foco);
+        //fotos.addFirst(foco);
         /*System.out.println(fotos);
         System.out.println("2");
         System.out.println("El tamaño es: "+fotos.size());*/
+        ScrollBar s = new ScrollBar();
+        s.setMin(0);  
+        s.setMax(200);  
+        s.setValue(110);  
+        s.setOrientation(Orientation.VERTICAL);  
+        s.setUnitIncrement(12);  
+        s.setBlockIncrement(10); 
         VBox vboxmenu = new VBox();
         /*System.out.println();
         System.out.println("primero:");
@@ -87,7 +106,7 @@ public class PantallaAlbumController implements Initializable {
         System.out.println("Entre for each");
         System.out.println(p1);
         }*/
-        try{
+     //   try{
         for (Photo p :fotos){
             // for(NodeList<Photo> p= fotos.getFirst();f ==fotos.getLast();f.next()){
             System.out.println("*");
@@ -96,11 +115,16 @@ public class PantallaAlbumController implements Initializable {
         /*    System.out.println(p.getRuta());
             System.out.println("Ruta " +App.class.getClassLoader().getResourceAsStream("recursos/fotos"));
             System.out.println("Ruta " +App.class.getClassLoader().getResourceAsStream("mariposa.jpg"));*/
+            System.out.println(p.getRuta());
             InputStream inputImg= App.class.getResource("/fotoss/"+p.getRuta()).openStream();
            // InputStream inputImg=App.class.getClassLoader().getResourceAsStream(p.getRuta());
             ImageView imgv = new ImageView(new Image(inputImg));
             //   ImageView imgv = new ImageView(new Image(getClass().getResourceAsStream("/fotoss/"+p.getRuta())));
+            imgv.setFitHeight(185);
+            imgv.setFitWidth(275);
             vboxmenu.getChildren().add(imgv);
+            
+            //
             
             //el nombre de la pelicula
             Label lnombre = new Label(p.getInfo());
@@ -112,16 +136,21 @@ public class PantallaAlbumController implements Initializable {
             vboxmenu.setPadding(new Insets(2,3,3,4));
             System.out.println("***");
         }
-        fpEspacio.getChildren().add(vboxmenu);
-        //si el archivo de pedido es diferente de null se lo carga
+        fpEspacio.setContent(vboxmenu);
+            //boolean add = fpEspacio.getChildren().add(vboxmenu);
+            //root.getChildren().add(s);
+            //fpEspacio.getChildren().add(s);
+            //si el archivo de pedido es diferente de null se lo carga
     }catch (IOException ex) {
             //si llegamos a este punto es porque no se pudo cargar del archivo
             //reporte.fxml el scenegraph
             //creamos con programacion un nuevo roort y lo fijamos a la scena
           /*  VBox v = new VBox(new Label("No se cargo el archivo FileChooser.fxml"));
             scene = new Scene(v);*/
-            System.out.println(ex);
+            System.out.println("Entre aqui");
+            System.out.println(ex.getMessage());
             //System.out.println(root);
+            //throw ex;
         }
 }}
         

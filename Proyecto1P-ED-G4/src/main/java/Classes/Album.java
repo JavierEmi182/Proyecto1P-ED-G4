@@ -17,6 +17,8 @@ public class Album {
     String nombre;
     DoubleCircularLinkedList<Photo> fotos;
     LocalDate fechaCreacion;
+
+    
     
     //getters and setters
 
@@ -51,6 +53,12 @@ public class Album {
         this.nombre = nombre;
         this.fotos = fotos;
         this.fechaCreacion=LocalDate.now();
+    }
+    //constructor recibiendo un LocalDate
+    public Album(String parte, DoubleCircularLinkedList<Photo> fotosAlbum, LocalDate fecha) {
+        this.nombre = nombre;
+        this.fotos = fotos;
+        this.fechaCreacion=fecha;
     }
     
     //metodos
