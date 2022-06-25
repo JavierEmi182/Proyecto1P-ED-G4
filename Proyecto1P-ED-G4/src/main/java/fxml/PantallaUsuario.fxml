@@ -25,19 +25,12 @@
       </HBox>
       <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
-            <ComboBox fx:id="cbAlbumes" prefHeight="25.0" prefWidth="358.0">
+            <Label prefHeight="96.0" prefWidth="150.0" text="Album que desea editar:" />
+            <ComboBox fx:id="cbAlbumes" onAction="#abrirVentanaEditarAlbum" prefHeight="25.0" prefWidth="242.0">
                <HBox.margin>
                   <Insets top="35.0" />
                </HBox.margin>
             </ComboBox>
-            <Button fx:id="btnModificar" mnemonicParsing="false" onAction="#modificarAlbum" prefHeight="68.0" prefWidth="146.0" text="Modificar">
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-               <HBox.margin>
-                  <Insets left="80.0" top="15.0" />
-               </HBox.margin>
-            </Button>
          </children>
       </HBox>
    </children>

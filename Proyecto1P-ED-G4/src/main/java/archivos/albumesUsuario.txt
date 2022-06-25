@@ -1,1 +1,2 @@
-AlbumPrueba;EscenaMarvel.jpg-foco.jpg-girasol.jpg-mariposa.jpg;null
+AlbumTodas;EscenaMarvel.jpg-foco.jpg-girasol.jpg-mariposa.jpg;null
+AlbumFavoritos;EscenaMarvel.jpg;null

@@ -18,6 +18,12 @@ public class Album {
     DoubleCircularLinkedList<Photo> fotos;
     LocalDate fechaCreacion;
 
+    public Album() {
+        this.nombre=null;
+        this.fotos=null;
+        this.fechaCreacion=null;
+}
+
     
     
     //getters and setters
