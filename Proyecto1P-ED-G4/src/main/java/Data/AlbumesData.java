@@ -42,6 +42,7 @@ public class AlbumesData {
                     //System.out.println(linea);
                     //dividir la en partes 
                     String[] partes = linea.split(";");
+                    //System.out.println("nombre album: "+partes[0]);
              /*       for(String s:partes){
                         for(Photo p:fotosCompletas){
                             if(p.getRuta().equals(s)){
@@ -55,18 +56,26 @@ public class AlbumesData {
                         System.out.println("Album vacio");
                         //personas=null;
                     }else{
-                    String[] partesFotos=partes[1].split("-");
-                    for(String s:partesFotos){
-                        for(Photo f:fotosCompletas){
-                            if(s.equals(f.getRuta())){
-                                fotosAlbum.addFirst(f);
+                        String[] partesFotos=partes[1].split("-");
+                        for(String s:partesFotos){
+                            for(Photo f:fotosCompletas){
+                                if(s.equals(f.getRuta())){
+                                    //System.out.println(s+" coincidio con "+f.getRuta());
+                                    fotosAlbum.addFirst(f);
                             }
                         }
                         //fotos.addFirst(s);
                     }
                     }
+                   // System.out.println("Album: "+fotosAlbum);
                     if(partes[2].equals("null")){
-                        albumes.addFirst(new Album(partes[0],fotosAlbum,LocalDate.now()));
+                        //System.out.println("Deberia entrar aqui");
+                        Album albumAñadir= new Album(partes[0],fotosAlbum,LocalDate.now());
+                        //System.out.println("album añadir es: "+albumAñadir);
+                        albumes.addFirst(albumAñadir);
+                        //albumes.addFirst(new Album(partes[0],fotosAlbum,LocalDate.now()));
+                        //System.out.println("tuvo que añadirse a albumes");
+                        //System.out.println(partes[0]+fotosAlbum+LocalDate.now());
                     }else{
                         albumes.addFirst(new Album(partes[0],fotosAlbum,LocalDate.parse(partes[2])));
                     }
@@ -79,7 +88,8 @@ public class AlbumesData {
                 System.out.println(ex.getMessage());
                 throw ex;
             } 
-       
+        //System.out.println("Llegue antes del return");
+        //System.out.println("Retorne: "+albumes);
         return albumes;
 }
     

@@ -6,22 +6,22 @@
 package estructuradatos.Proyecto1P;
 
 import Classes.Album;
-import Classes.Usuario;
+import static Data.AlbumesData.leerAlbumes;
+import static Data.fotosData.leerFotos;
 import TDAs.DoubleCircularLinkedList;
+import TDAs.List;
+import TDAs.NodeList;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.VBox;
 
 /**
  * FXML Controller class
@@ -33,20 +33,62 @@ public class PantallaUsuarioController implements Initializable {
     @FXML
     private Label lbCantidadAlbumes;
     @FXML
-    private Button BtnAlbum1;
+    private Button BtnTodasImagenes;
     @FXML
     private Button BtnAlbum2;
     @FXML
     private Button BtnAlbum3;
     @FXML
-    private Button btnBuscar;
+    private ComboBox<String> cbAlbumes;
+    @FXML
+    private Button btnModificar;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-      //  Usuario u1= new Usuario("Usuario1","contraseña");
-    }   
+        try {
+            DoubleCircularLinkedList<Album> albumes = leerAlbumes("/archivos/albumesUsuario.txt",leerFotos("/archivos/fotosUsuario.txt"));
+            lbCantidadAlbumes.setText(String.valueOf(albumes.size()));
+            System.out.println(albumes);
+            //List<String> nombresAlbumes = null;
+            if(albumes.isEmpty()){
+                System.out.println("Albumes esta vacia");
+            }else if(albumes.size()==1){
+                //System.out.println("Entre a un album");
+            //System.out.println("Entre al to string con un elemento");
+                System.out.println(albumes.getFirst().getContent());
+                System.out.println(albumes.getFirst().getContent().getNombre());
+                cbAlbumes.getItems().add(albumes.getFirst().getContent().getNombre());
+            }else if (albumes.size()==2){
+            //System.out.println("Entre al to string con dos elemento");
+                cbAlbumes.getItems().add(albumes.getFirst().getContent().getNombre());
+                cbAlbumes.getItems().add(albumes.getLast().getContent().getNombre());
+            }else{
+                for (NodeList<Album> t = albumes.getFirst(); !t.getNext().equals(albumes.getFirst()); t = t.getNext()) {
+                //System.out.println("Entre al to string con"+t.getContent());
+                    cbAlbumes.getItems().add(t.getContent().getNombre());
+                }
+            //return "["+s+this.getLast().getContent()+"]";
+            }
+            //cbComida.getItems().addAll(tipos); 
+            
+        } catch (IOException ex) {
+            System.out.println(ex);
+        }
+    }    
+
+    @FXML
+    private void moveToAlbumTodas(ActionEvent event) throws IOException {
+        App.setRoot("/fxml/PantallaAlbum");
+        //App.setRoot(fxml);
+    }
+
+    @FXML
+    private void modificarAlbum(ActionEvent event) {
+        //aqui deberia abrir ventana segun el album seleccionado
+        //cbAlbumes.getTypeSelector()
+    }
+    
 }

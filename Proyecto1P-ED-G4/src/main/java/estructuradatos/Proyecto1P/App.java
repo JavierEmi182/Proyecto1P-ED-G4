@@ -37,7 +37,7 @@ public class App extends Application {
            
            //FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/FileChooser.fxml"));
            
-           FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/PantallaAlbum.fxml"));
+           FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/PantallaUsuario.fxml"));
             
             //FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/"+getClass().getCanonicalName().replaceAll(".", "/").replaceAll("Controller", "")+"fxml"));
             //fxmlLoader.setLocation(App.class.getResource("/src/fxml/FileChooser.fxml"));
@@ -45,7 +45,7 @@ public class App extends Application {
             //System.out.println(App.class.getResource("FileChooserController.class"));
             //System.out.println(App.class.getResource(""));
             //System.out.println(getClass().getResource("/fxml/FileChooser.fxml"));
-            System.out.println("location:"+fxmlLoader.getLocation());
+            //System.out.println("location:"+fxmlLoader.getLocation());
             Parent root = fxmlLoader.load();
             //fxmlLoader.
             //System.out.println("Esto no se completo");
@@ -56,7 +56,7 @@ public class App extends Application {
             //si llegamos a este punto es porque no se pudo cargar del archivo
             //reporte.fxml el scenegraph
             //creamos con programacion un nuevo roort y lo fijamos a la scena
-            VBox v = new VBox(new Label("No se cargo el archivo FileChooser.fxml"));
+            VBox v = new VBox(new Label("No se cargo el archivo PantallaUsuario.fxml"));
             scene = new Scene(v);
             System.out.println(ex);
             //System.out.println(root);

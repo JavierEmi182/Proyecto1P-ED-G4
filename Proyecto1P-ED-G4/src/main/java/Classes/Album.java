@@ -55,9 +55,9 @@ public class Album {
         this.fechaCreacion=LocalDate.now();
     }
     //constructor recibiendo un LocalDate
-    public Album(String parte, DoubleCircularLinkedList<Photo> fotosAlbum, LocalDate fecha) {
+    public Album(String nombre, DoubleCircularLinkedList<Photo> fotosAlbum, LocalDate fecha) {
         this.nombre = nombre;
-        this.fotos = fotos;
+        this.fotos = fotosAlbum;
         this.fechaCreacion=fecha;
     }
     
@@ -77,4 +77,9 @@ public class Album {
         return false;
     }
     //return false;}
+    
+    @Override
+    public String toString() {
+        return this.getNombre()+"= "+fotos;
+    }
 }

@@ -384,7 +384,9 @@ public class DoubleCircularLinkedList<E> implements Iterable<E>, List<E>  {
             int i=0;
             @Override
             public boolean hasNext() {
-                if(cursor.getContent().equals(first.getContent())&&i==0){
+                if(size()==1){
+                    return false;
+                }else if(cursor.getContent().equals(first.getContent())&&i==0){
                     i++;
                     //System.out.println("entre if");
                     return cursor.getContent()!=null;
