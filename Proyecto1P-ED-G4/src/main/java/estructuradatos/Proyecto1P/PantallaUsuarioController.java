@@ -58,8 +58,14 @@ public class PantallaUsuarioController implements Initializable {
             }else if(albumes.size()==1){
                 //System.out.println("Entre a un album");
             //System.out.println("Entre al to string con un elemento");
+                /*System.out.println(albumes.getFirst().getContent());
+                System.out.println(albumes.getFirst().getContent().getNombre());*/
+                
+            /*    System.out.println("PRUEBA");
                 System.out.println(albumes.getFirst().getContent());
-                System.out.println(albumes.getFirst().getContent().getNombre());
+                System.out.println(albumes.getFirst().getContent().getFotos().toString().substring(1, albumes.getFirst().getContent().getFotos().toString().length()-1).replaceAll(",", "-"));*/
+                //System.out.println(albumes.getFirst().getContent().toString().substring(1, -1).replaceAll(",", "-"));
+                
                 cbAlbumes.getItems().add(albumes.getFirst().getContent().getNombre());
             }else if (albumes.size()==2){
             //System.out.println("Entre al to string con dos elemento");
@@ -68,6 +74,9 @@ public class PantallaUsuarioController implements Initializable {
             }else{
                 for (NodeList<Album> t = albumes.getFirst(); !t.getNext().equals(albumes.getFirst()); t = t.getNext()) {
                 //System.out.println("Entre al to string con"+t.getContent());
+                    System.out.println("PRUEBA");
+                    System.out.println(t.getContent());
+                    System.out.println(t.getContent().toString().substring(1, -1).replaceAll(",", "-"));
                     cbAlbumes.getItems().add(t.getContent().getNombre());
                 }
             //return "["+s+this.getLast().getContent()+"]";
@@ -88,6 +97,9 @@ public class PantallaUsuarioController implements Initializable {
     @FXML
     private void modificarAlbum(ActionEvent event) {
         //aqui deberia abrir ventana segun el album seleccionado
+        //SECUENCIA PARA NUEVA VENTANA
+        //stage.setScene(  ) -> scene = new Scene(Parent root) -> 
+        //Parent root = fxmlLoader.load(); -> FXMLLoader f = new FXMLLoader(App.class.getResource("ruta")
         //cbAlbumes.getTypeSelector()
     }
     
