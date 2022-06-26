@@ -37,7 +37,7 @@ public class App extends Application {
            
            //FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/FileChooser.fxml"));
            
-           FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/PantallaUsuario.fxml"));
+           FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/Ventana_Album.fxml"));
             
             //FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/"+getClass().getCanonicalName().replaceAll(".", "/").replaceAll("Controller", "")+"fxml"));
             //fxmlLoader.setLocation(App.class.getResource("/src/fxml/FileChooser.fxml"));

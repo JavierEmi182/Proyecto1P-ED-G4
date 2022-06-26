@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane id="AnchorPane" prefHeight="494.0" prefWidth="662.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="estructuradatos.Proyecto1P.Ventana_AlbumController">
+   <children>
+      <ScrollPane fx:id="scrollPane1" prefHeight="494.0" prefWidth="662.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="493.0" prefWidth="661.0">
+               <children>
+                  <BorderPane prefHeight="478.0" prefWidth="649.0">
+                     <center>
+                        <TabPane fx:id="tabPane" prefHeight="494.0" prefWidth="662.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+                          <tabs>
+                            <Tab text="Library">
+                              <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <ToolBar prefHeight="45.0" prefWidth="653.0">
+                                            <items>
+                                              <Button fx:id="btn_CrearAlbum" mnemonicParsing="false" onAction="#crearAlbum" text="Crear Albúm" />
+                                            </items>
+                                          </ToolBar>
+                                          <GridPane layoutY="45.0" prefHeight="406.0" prefWidth="649.0">
+                                            <columnConstraints>
+                                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="319.0" minWidth="10.0" prefWidth="153.0" />
+                                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="525.0" minWidth="10.0" prefWidth="496.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                             <children>
+                                                <SplitPane dividerPositions="0.20297029702970298" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" GridPane.columnIndex="1">
+                                                  <items>
+                                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="133.0" prefWidth="494.0">
+                                                         <children>
+                                                            <GridPane layoutY="-2.0" prefHeight="89.0" prefWidth="495.0">
+                                                              <columnConstraints>
+                                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="313.0" minWidth="10.0" prefWidth="313.0" />
+                                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="241.0" minWidth="10.0" prefWidth="182.0" />
+                                                              </columnConstraints>
+                                                              <rowConstraints>
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                              </rowConstraints>
+                                                               <children>
+                                                                  <VBox prefHeight="200.0" prefWidth="100.0">
+                                                                     <children>
+                                                                        <Label fx:id="lbl_Nombre" prefHeight="34.0" prefWidth="75.0" text="Label" />
+                                                                        <Label fx:id="lbl_Descripcion" prefHeight="34.0" prefWidth="75.0" text="Label" />
+                                                                     </children>
+                                                                  </VBox>
+                                                                  <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
+                                                                     <children>
+                                                                        <Button fx:id="btn_Editar" mnemonicParsing="false" onAction="#editarAlbum" text="Editar" />
+                                                                        <Button fx:id="btn_AgregarFoto" mnemonicParsing="false" onAction="#agregarFoto" text="Agregar Foto" />
+                                                                     </children>
+                                                                  </VBox>
+                                                               </children>
+                                                            </GridPane>
+                                                         </children></AnchorPane>
+                                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="336.0" prefWidth="494.0" />
+                                                  </items>
+                                                </SplitPane>
+                                                <Accordion>
+                                                  <panes>
+                                                    <TitledPane fx:id="list_Album" animated="false" text="Albumes">
+                                                      <content>
+                                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                                      </content>
+                                                    </TitledPane>
+                                                  </panes>
+                                                </Accordion>
+                                             </children>
+                                          </GridPane>
+                                       </children>
+                                    </AnchorPane>
+                              </content>
+                            </Tab>
+                              <Tab text="Library">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <ToolBar prefHeight="45.0" prefWidth="653.0">
+                                             <items>
+                                                <Button fx:id="btn_CrearAlbum1" mnemonicParsing="false" onAction="#crearAlbum" text="Crear Albúm" />
+                                             </items>
+                                          </ToolBar>
+                                          <GridPane layoutY="45.0" prefHeight="406.0" prefWidth="649.0">
+                                             <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="319.0" minWidth="10.0" prefWidth="153.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="525.0" minWidth="10.0" prefWidth="496.0" />
+                                             </columnConstraints>
+                                             <rowConstraints>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                             </rowConstraints>
+                                             <children>
+                                                <SplitPane dividerPositions="0.20297029702970298" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" GridPane.columnIndex="1">
+                                                   <items>
+                                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="133.0" prefWidth="494.0">
+                                                         <children>
+                                                            <GridPane layoutY="-2.0" prefHeight="89.0" prefWidth="495.0">
+                                                               <columnConstraints>
+                                                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="313.0" minWidth="10.0" prefWidth="313.0" />
+                                                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="241.0" minWidth="10.0" prefWidth="182.0" />
+                                                               </columnConstraints>
+                                                               <rowConstraints>
+                                                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                               </rowConstraints>
+                                                               <children>
+                                                                  <VBox prefHeight="200.0" prefWidth="100.0">
+                                                                     <children>
+                                                                        <Label fx:id="lbl_Nombre1" prefHeight="34.0" prefWidth="75.0" text="Label" />
+                                                                        <Label fx:id="lbl_Descripcion1" prefHeight="34.0" prefWidth="75.0" text="Label" />
+                                                                     </children>
+                                                                  </VBox>
+                                                                  <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
+                                                                     <children>
+                                                                        <Button fx:id="btn_Editar1" mnemonicParsing="false" onAction="#editarAlbum" text="Editar" />
+                                                                        <Button fx:id="btn_AgregarFoto1" mnemonicParsing="false" onAction="#agregarFoto" text="Agregar Foto" />
+                                                                     </children>
+                                                                  </VBox>
+                                                               </children>
+                                                            </GridPane>
+                                                         </children>
+                                                      </AnchorPane>
+                                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="336.0" prefWidth="494.0">
+                                                         <children>
+                                                            <Label layoutX="192.0" layoutY="81.0" text="Label" />
+                                                            <Label layoutX="115.0" layoutY="179.0" text="Label" />
+                                                            <Label layoutX="247.0" layoutY="112.0" text="Label" />
+                                                            <Label layoutX="261.0" layoutY="171.0" text="Label" />
+                                                         </children>
+                                                      </AnchorPane>
+                                                   </items>
+                                                </SplitPane>
+                                                <Accordion>
+                                                   <panes>
+                                                      <TitledPane fx:id="list_Album1" animated="false" text="Albumes">
+                                                         <content>
+                                                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                                                         </content>
+                                                      </TitledPane>
+                                                   </panes>
+                                                </Accordion>
+                                             </children>
+                                          </GridPane>
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                          </tabs>
+                        </TabPane>
+                     </center>
+                  </BorderPane>
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>
