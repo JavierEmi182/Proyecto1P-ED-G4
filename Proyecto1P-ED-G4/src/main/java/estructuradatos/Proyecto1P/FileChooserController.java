@@ -6,6 +6,7 @@
 package estructuradatos.Proyecto1P;
 
 import Classes.Photo;
+import static Data.AlbumesData.imagenExiste;
 import static Data.AlbumesData.ingresarNuevoImagen;
 import static Data.fotosData.escribirFotos;
 import TDAs.DoubleCircularLinkedList;
@@ -117,7 +118,31 @@ public class FileChooserController implements Initializable {
         Photo fotoSeleccionada= new Photo(direccion[direccion.length-1],personasDcl,tfLugar.getText(),tfInfo.getText(),i);
         escribirFotos(fotoSeleccionada);
         System.out.println("Foto seleccionada: "+fotoSeleccionada);
-        ingresarNuevoImagen(fotoSeleccionada,1);
+        //SI EL CHECKBOX ESTA ENCENDIDA, AGREGO IMAGEN EN LA LINEA 1, QUE ES EL ALBUM DE FAVORITOS
+        
+        //SI LA IMAGEN NO ESTA EN EL ALBUM DE TODAS LAS IMAGENES
+        if(!imagenExiste(fotoSeleccionada)){
+            ingresarNuevoImagen(fotoSeleccionada,0); //LA AÑADO A TODAS
+        }
+        
+        if(i==1){
+                ingresarNuevoImagen(fotoSeleccionada,1);
+                //AQUI DEBERIA AÑADIRLA SOLO ALBUM DEL SCENE Y FAVORITAS
+                //int i=getLineadeNombreAlbum("/archivos/albumesUsuario.txt",album.getNombre());
+                //ingresarNuevoImagen(fotoSeleccionada,i);
+                //ingresarNuevoImagen(fotoSeleccionada,1); 
+            
+            
+            
+        }else{
+            
+                //AQUI DEBERIA AÑADIRLA SOLO ALBUM DEL SCENE Y FAVORITAS
+                //int i=getLineadeNombreAlbum("/archivos/albumesUsuario.txt",album.getNombre());
+                //ingresarNuevoImagen(fotoSeleccionada,i);
+            }  
+        
+        
+        
     }
 
     @FXML

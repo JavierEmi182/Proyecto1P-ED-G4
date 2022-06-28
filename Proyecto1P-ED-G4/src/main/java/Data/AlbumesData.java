@@ -165,13 +165,11 @@ public class AlbumesData {
         
         System.out.println(result);*/
         
+       //SPLIT PARA DIVIDIR EL ARCHIVO EN LINEAS
         String completo=leerArchivoCompleto("/archivos/albumesUsuario.txt");
-        System.out.println(completo);
-        
-        //String result = IOUtils.toString(input, StandardCharsets.UTF_8);
-        
-        //String lineas[]=completo.split("\n");
         String lineas[]=completo.split("\r?\n|\r");
+        
+        
         String[] editarLinea=lineas[a].split(";");
         String nuevaLinea=editarLinea[0]+";"+editarLinea[1]+"-"+nuevaImagen.getRuta()+";"+editarLinea[2];
         /*System.out.println("lineas a :"+lineas[a]);
@@ -245,8 +243,12 @@ public class AlbumesData {
     //NO PROBADO
     public static int getLineadeNombreAlbum(String ruta, String elementoBuscado) throws IOException{
         int l=0;
-        String split[] = leerArchivoCompleto(ruta).split("\n");
-        for(String s:split){
+        
+        String completo=leerArchivoCompleto("/archivos/albumesUsuario.txt");
+        String lineas[]=completo.split("\r?\n|\r");
+        
+        //String split[] = leerArchivoCompleto(ruta).split("\n");
+        for(String s:lineas){
             String lineaSeparada[]=s.split(";");
             if(lineaSeparada[0].equals(elementoBuscado)){
                 return l;
@@ -260,6 +262,18 @@ public class AlbumesData {
         int numLinea=getLineadeNombreAlbum(ruta,album.getNombre());
         String nuevaLinea=album.getNombre()+";"+album.getFotos().toString().substring(1, album.getFotos().toString().length()-1).replaceAll(",", "-")+";"+album.getFechaCreacion().toString();
         ingresar(ruta,nuevaLinea,numLinea);
+    }
+    
+    public static boolean imagenExiste(Photo foto) throws IOException{
+        String completo=leerArchivoCompleto("/archivos/albumesUsuario.txt");
+        String lineas[]=completo.split("\r?\n|\r");
+        String fotosCompletas[]=lineas[0].split("-");
+        for(String f:fotosCompletas){
+            if(f.equals(foto.getRuta())){
+                return true;
+            }
+        }
+        return false;
     }
 
 }
