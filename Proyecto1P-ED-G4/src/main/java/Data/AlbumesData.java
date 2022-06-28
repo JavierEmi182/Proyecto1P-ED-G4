@@ -19,7 +19,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
+import java.util.Scanner;
+import java.util.regex.Pattern;
+
 
 /**
  *
@@ -97,7 +101,7 @@ public class AlbumesData {
     
     public static void escribirAlbumes(Album album) {
         
-        String ruta = "albumesUsuario.txt";
+        String ruta = "/archivos/albumesUsuario.txt";
         //List<Comida> comidas = new ArrayList<>();
         File file = new File(App.class.getResource(ruta).getFile());
         try(BufferedWriter bw = new BufferedWriter(new FileWriter(file,true))){
@@ -125,7 +129,7 @@ public class AlbumesData {
     
     //LEE ARCHIVO COMPLETO Y RETORNO EL STRING DE TODO
     public static String leerArchivoCompleto(String ruta) throws FileNotFoundException, IOException{
-        String cadena = "";
+        /*String cadena = "";
         FileReader entrada = null;
             entrada = new FileReader(ruta);
             int c;
@@ -133,8 +137,80 @@ public class AlbumesData {
              cadena += (char)c;
             }
     
-        return cadena;
+        return cadena;*/
+        
+        InputStream input = App.class.getResource(ruta).openStream();
+        //input.
+        //System.out.println(input);
+        
+        Scanner s = new Scanner(input).useDelimiter("\\A");
+        String result = s.hasNext() ? s.next() : "";
+        
+        return result;
+        
     }
+    
+    //SOBREESCRIBIR FAVORITOS
+    public static void ingresarNuevoImagen(Photo nuevaImagen,int a) throws IOException{
+        // a =0 ->Todas
+        //a =1  ->Favoritos
+        // si se conoce el numero del album tambien funcionaria con el resto
+        //String completo=leerArchivoCompleto("/archivos/albumesUsuario.txt");
+        InputStream input = App.class.getResource("/archivos/albumesUsuario.txt").openStream();
+        
+        //System.out.println(input);
+        
+       /* Scanner s = new Scanner(input).useDelimiter("\\A");
+        String result = s.hasNext() ? s.next() : "";
+        
+        System.out.println(result);*/
+        
+        String completo=leerArchivoCompleto("/archivos/albumesUsuario.txt");
+        System.out.println(completo);
+        
+        //String result = IOUtils.toString(input, StandardCharsets.UTF_8);
+        
+        //String lineas[]=completo.split("\n");
+        String lineas[]=completo.split("\r?\n|\r");
+        String[] editarLinea=lineas[a].split(";");
+        String nuevaLinea=editarLinea[0]+";"+editarLinea[1]+"-"+nuevaImagen.getRuta()+";"+editarLinea[2];
+        /*System.out.println("lineas a :"+lineas[a]);
+        System.out.println(nuevaLinea);*/
+        //String fotosFavoritas[]=lineas[1].split("-");
+        String ruta = App.class.getResource("/archivos/albumesUsuario.txt").getFile();
+        int posicion = 1;
+        FileWriter fichero = null;
+        PrintWriter escritor = null;
+        try {
+        fichero = new FileWriter(ruta);
+        escritor = new PrintWriter(fichero);
+        escritor.flush();
+        
+        //String split[] = leerArchivoCompleto("/archivos/albumesUsuario.txt").split("\r?\n|\r");
+           // System.out.println(split[0]);
+           // System.out.println(split.length);
+        lineas[posicion] = nuevaLinea;
+        
+        for(int x = 0; x < lineas.length; x++){
+            escritor.write(lineas[x]);
+            escritor.println();
+         }
+            escritor.close();
+        } catch (IOException e) {
+            System.out.println(e);
+           // JOptionPane.showMessageDialog(null, "Error al escribir en el archivo de texto: "+e.getMessage());
+        } finally {
+            if(fichero != null){
+                try {
+                    fichero.close();
+                } catch (IOException e) {
+                    System.out.println(e);
+                   // JOptionPane.showMessageDialog(null, "Error al cerrar archivo de texto: "+e.getMessage());
+                }
+               }
+        }
+    }
+    
     
     //DEBERIA SOBREESCRIBIR EN LA LINEA DESEADA LA NUEVA LINEA
     public static void ingresar(String ruta,String nuevaLinea, int posicion){

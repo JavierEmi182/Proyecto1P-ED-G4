@@ -78,7 +78,7 @@ public class fotosData {
     
     public static void escribirFotos(Photo foto) {
         
-        String ruta = "fotosUsuario.txt";
+        String ruta = "/archivos/fotosUsuario.txt";
         //List<Comida> comidas = new ArrayList<>();
         File file = new File(App.class.getResource(ruta).getFile());
         try(BufferedWriter bw = new BufferedWriter(new FileWriter(file,true))){
