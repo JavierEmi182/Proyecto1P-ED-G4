@@ -38,9 +38,9 @@ public class App extends Application {
            //FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/FileChooser.fxml"));
            
            //PRUBEAS FILE CHOOSER
-           FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/FileChooser.fxml"));
+           //FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/FileChooser.fxml"));
            
-           //FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/Ventana_Album.fxml"));
+           FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/Ventana_Album.fxml"));
             
            
            //FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/PantallaAlbum.fxml"));
