@@ -25,7 +25,7 @@
          <children>
             <Label text="Buscar y mostrar imagen" />
             <Button fx:id="btnBuscar" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Buscar" textAlignment="CENTER" GridPane.columnIndex="1" />
-            <ImageView fx:id="ivImagen" fitHeight="322.0" fitWidth="467.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1" />
+            <ImageView fx:id="ivImagen" fitHeight="322.0" fitWidth="443.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1" />
             <VBox prefHeight="335.0" prefWidth="139.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
                   <Label prefHeight="29.0" prefWidth="110.0" text="Lugar:" />

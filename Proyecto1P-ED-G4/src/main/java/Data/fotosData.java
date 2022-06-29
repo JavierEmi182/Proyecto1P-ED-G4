@@ -11,12 +11,14 @@ import estructuradatos.Proyecto1P.App;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 /**
@@ -27,8 +29,10 @@ public class fotosData {
     
     public static DoubleCircularLinkedList<Photo> leerFotos(String ruta) throws IOException{
         DoubleCircularLinkedList<Photo> fotos = new DoubleCircularLinkedList<Photo>();
-        
-        try(InputStream input = App.class.getResource(ruta).openStream();
+        //ESTA FUNCIONA
+        //try(InputStream input = App.class.getResource(ruta).openStream();
+        try(InputStream input = new URL("file:"+ruta).openStream();
+                
                 BufferedReader bf = new BufferedReader(
                                     new InputStreamReader(input,"UTF-8"))){
             //GENERA EL URL RELATIVO AL ARCHIVO QUE VAMOS A LEER
@@ -76,11 +80,14 @@ public class fotosData {
         return fotos;
 }
     
-    public static void escribirFotos(Photo foto) {
-        
-        String ruta = "/archivos/fotosUsuario.txt";
+    public static void escribirFotos(Photo foto) throws MalformedURLException {
+        //FUNCIONA EN EL TARGET
+        //String ruta = "/archivos/fotosUsuario.txt";
         //List<Comida> comidas = new ArrayList<>();
-        File file = new File(App.class.getResource(ruta).getFile());
+        //File file = new File(App.class.getResource(ruta).getFile());
+        //INTENTO PERMANENTE
+        String ruta="recursos/textos/fotosUsuario.txt";
+        File file = new File(new URL("file:"+ruta).getFile());
         try(BufferedWriter bw = new BufferedWriter(new FileWriter(file,true))){
             bw.newLine();
             //String linea = comida.getNombre()+";"+ comida.getPrecio()+";"+comida.getRutaImagen()+";"+comida.getTipoComida();

@@ -19,6 +19,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.util.Scanner;
@@ -33,7 +35,9 @@ public class AlbumesData {
     
     public static DoubleCircularLinkedList<Album> leerAlbumes(String ruta,DoubleCircularLinkedList<Photo> fotosCompletas) throws IOException{
         DoubleCircularLinkedList<Album> albumes = new DoubleCircularLinkedList<Album>();
-        try(InputStream input = App.class.getResource(ruta).openStream();
+        //SIRVE EN TARGET
+        //try(InputStream input = App.class.getResource(ruta).openStream();
+        try(InputStream input = new URL("file:"+ruta).openStream();        
                 BufferedReader bf = new BufferedReader(
                                     new InputStreamReader(input,"UTF-8"))){
             //GENERA EL URL RELATIVO AL ARCHIVO QUE VAMOS A LEER
@@ -99,11 +103,17 @@ public class AlbumesData {
         return albumes;
 }
     
-    public static void escribirAlbumes(Album album) {
-        
-        String ruta = "/archivos/albumesUsuario.txt";
+    public static void escribirAlbumes(Album album) throws MalformedURLException {
+        //FUNCIONA EN EL TARGET
+        //String ruta = "/archivos/albumesUsuario.txt";
+
         //List<Comida> comidas = new ArrayList<>();
-        File file = new File(App.class.getResource(ruta).getFile());
+        //try(InputStream input = new URL("file:"+ruta).openStream();
+        //FUNCIONA EN TARGET
+        //File file = new File(App.class.getResource(ruta).getFile());
+        //INTENTO PERMANENTE
+        String ruta="recursos/textos/AlbumesUsuario.txt";
+        File file = new File(new URL("file:"+ruta).getFile());
         try(BufferedWriter bw = new BufferedWriter(new FileWriter(file,true))){
             bw.newLine();
             //String linea = comida.getNombre()+";"+ comida.getPrecio()+";"+comida.getRutaImagen()+";"+comida.getTipoComida();
@@ -138,8 +148,12 @@ public class AlbumesData {
             }
     
         return cadena;*/
+        //FUNCIONA TARGET
+        //InputStream input = App.class.getResource(ruta).openStream();
         
-        InputStream input = App.class.getResource(ruta).openStream();
+        //INTENTO PERMANENTE
+        
+        InputStream input = new URL("file:"+ruta).openStream();
         //input.
         //System.out.println(input);
         
@@ -156,7 +170,11 @@ public class AlbumesData {
         //a =1  ->Favoritos
         // si se conoce el numero del album tambien funcionaria con el resto
         //String completo=leerArchivoCompleto("/archivos/albumesUsuario.txt");
-        InputStream input = App.class.getResource("/archivos/albumesUsuario.txt").openStream();
+        //FUNCIONA EN TARGET
+        //InputStream input = App.class.getResource("/archivos/albumesUsuario.txt").openStream();
+        
+        //INTENTO PERMANENTE
+        InputStream input = new URL("file:recursos/textos/albumesUsuario.txt").openStream();
         
         //System.out.println(input);
         
@@ -166,7 +184,10 @@ public class AlbumesData {
         System.out.println(result);*/
         
        //SPLIT PARA DIVIDIR EL ARCHIVO EN LINEAS
-        String completo=leerArchivoCompleto("/archivos/albumesUsuario.txt");
+       //FUNCIONA TARGET
+        //String completo=leerArchivoCompleto("/archivos/albumesUsuario.txt");
+        //INTENTO PERMANENTE
+        String completo=leerArchivoCompleto("recursos/textos/albumesUsuario.txt");
         String lineas[]=completo.split("\r?\n|\r");
         
         
@@ -175,8 +196,11 @@ public class AlbumesData {
         /*System.out.println("lineas a :"+lineas[a]);
         System.out.println(nuevaLinea);*/
         //String fotosFavoritas[]=lineas[1].split("-");
-        String ruta = App.class.getResource("/archivos/albumesUsuario.txt").getFile();
-        int posicion = 1;
+        //FUNCIONA TARGET
+        //String ruta = App.class.getResource("/archivos/albumesUsuario.txt").getFile();
+        //INTENTO PERMANENTE
+        String ruta = new URL("file:recursos/textos/albumesUsuario.txt").getFile();
+        int posicion = a;
         FileWriter fichero = null;
         PrintWriter escritor = null;
         try {
@@ -187,6 +211,7 @@ public class AlbumesData {
         //String split[] = leerArchivoCompleto("/archivos/albumesUsuario.txt").split("\r?\n|\r");
            // System.out.println(split[0]);
            // System.out.println(split.length);
+            System.out.println(nuevaLinea);
         lineas[posicion] = nuevaLinea;
         
         for(int x = 0; x < lineas.length; x++){
@@ -243,8 +268,10 @@ public class AlbumesData {
     //NO PROBADO
     public static int getLineadeNombreAlbum(String ruta, String elementoBuscado) throws IOException{
         int l=0;
-        
-        String completo=leerArchivoCompleto("/archivos/albumesUsuario.txt");
+        //INTENTO TARGET
+        //String completo=leerArchivoCompleto("/archivos/albumesUsuario.txt");
+        //INTENTO PERMANENTE
+        String completo=leerArchivoCompleto("recursos/textos/albumesUsuario.txt");
         String lineas[]=completo.split("\r?\n|\r");
         
         //String split[] = leerArchivoCompleto(ruta).split("\n");
@@ -265,7 +292,10 @@ public class AlbumesData {
     }
     
     public static boolean imagenExiste(Photo foto) throws IOException{
-        String completo=leerArchivoCompleto("/archivos/albumesUsuario.txt");
+        //FUNCIONA TARGET
+        //String completo=leerArchivoCompleto("/archivos/albumesUsuario.txt");
+        //INTENTO PERMANENTE
+        String completo=leerArchivoCompleto("recursos/textos/albumesUsuario.txt");
         String lineas[]=completo.split("\r?\n|\r");
         String fotosCompletas[]=lineas[0].split("-");
         for(String f:fotosCompletas){

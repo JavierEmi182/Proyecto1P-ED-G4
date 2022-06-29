@@ -55,7 +55,11 @@ public class PantallaAlbumController implements Initializable {
         try {
             //System.out.println("Entre al pantallaAlbumController");
             //System.out.println(leerFotos("fotosUsuario.txt"));
-            DoubleCircularLinkedList<Photo> fotos = leerFotos("/archivos/fotosUsuario.txt");
+            //FUNCIONA EN TARGET
+            //DoubleCircularLinkedList<Photo> fotos = leerFotos("/archivos/fotosUsuario.txt");
+            //FUNCIONA CAMBIOS PERMANENTE
+            DoubleCircularLinkedList<Photo> fotos = leerFotos("recursos/textos/fotosUsuario.txt");
+            
             System.out.println(fotos);
         
         //System.out.println("1");
@@ -116,9 +120,22 @@ public class PantallaAlbumController implements Initializable {
             System.out.println("Ruta " +App.class.getClassLoader().getResourceAsStream("recursos/fotos"));
             System.out.println("Ruta " +App.class.getClassLoader().getResourceAsStream("mariposa.jpg"));*/
             System.out.println(p.getRuta());
-            InputStream inputImg= App.class.getResource("/fotoss/"+p.getRuta()).openStream();
+            
+            //ESTA FUNCIONA
+            //InputStream inputImg= App.class.getResource("/fotoss/"+p.getRuta()).openStream();
+            
+           // InputStream inputImg= App.class.getResourceAsStream("recursos/fotos/"+p.getRuta());
+            //InputStream inputImg= new InputStream();
+            //InputStream inputImg= ("recursos/fotos"+p.getRuta()).openStream();
+            
            // InputStream inputImg=App.class.getClassLoader().getResourceAsStream(p.getRuta());
-            ImageView imgv = new ImageView(new Image(inputImg));
+           //FUNCIONO ESTA RUTA PERMANENTE
+           Image i= new Image("file:recursos/fotos/"+p.getRuta());
+           
+           //ESTA FUNCIONA
+            //ImageView imgv = new ImageView(new Image(inputImg));
+            //FUNCIONO ESTA RUTA PERMANENTE
+            ImageView imgv= new ImageView(i);
             //   ImageView imgv = new ImageView(new Image(getClass().getResourceAsStream("/fotoss/"+p.getRuta())));
             imgv.setFitHeight(185);
             imgv.setFitWidth(275);

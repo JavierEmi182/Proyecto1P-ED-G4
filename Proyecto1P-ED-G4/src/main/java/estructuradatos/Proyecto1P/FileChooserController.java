@@ -102,7 +102,10 @@ public class FileChooserController implements Initializable {
         
         //System.out.println(App.class.getResource("/fotoss/").getFile());
         System.out.println("Si imprime True, se logro");
-        System.out.println(fileSeleccionado.renameTo(new File(App.class.getResource("/fotoss/").getFile()+direccion[direccion.length-1])));
+        //FUNCIONA EN TARGET
+        //System.out.println(fileSeleccionado.renameTo(new File(App.class.getResource("/fotoss/").getFile()+direccion[direccion.length-1])));
+        //INTENTO RUTA PERMANENTE
+        System.out.println(fileSeleccionado.renameTo(new File(new URL("file:recursos/fotos/").getFile()+direccion[direccion.length-1])));
         
         //File f= new File(App.class.getResource("/fotoss/mariposa.jpg"));
         //fileSeleccionado.delete();
@@ -122,10 +125,12 @@ public class FileChooserController implements Initializable {
         
         //SI LA IMAGEN NO ESTA EN EL ALBUM DE TODAS LAS IMAGENES
         if(!imagenExiste(fotoSeleccionada)){
+            System.out.println("Agrege a album de todas");
             ingresarNuevoImagen(fotoSeleccionada,0); //LA AÑADO A TODAS
         }
         
         if(i==1){
+            System.out.println("Agrege album favoritos");
                 ingresarNuevoImagen(fotoSeleccionada,1);
                 //AQUI DEBERIA AÑADIRLA SOLO ALBUM DEL SCENE Y FAVORITAS
                 //int i=getLineadeNombreAlbum("/archivos/albumesUsuario.txt",album.getNombre());
