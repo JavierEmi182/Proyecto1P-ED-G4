@@ -20,6 +20,7 @@ public class Photo {
     Boolean favorita= false;
     LocalDate fecha;
     String info;
+    //DoubleCircularLinkedList<String> palabrasClaves;
     
     
     //getters y setters
@@ -70,6 +71,16 @@ public class Photo {
     public void setFavorita(Boolean favorita) {
         this.favorita = favorita;
     }
+    /*
+    public DoubleCircularLinkedList<String> getPalabrasClave() {
+        return palabrasClaves;
+    }
+
+    public void setPalabrasClave(DoubleCircularLinkedList<String> palabrasClaves) {
+        this.palabrasClaves = palabrasClaves;
+    }
+    */
+    
     
     //constructor
 
@@ -83,7 +94,20 @@ public class Photo {
             this.favorita=true;
         }
     }
-    
+    /*
+    palabrasClaves
+    public Photo(String ruta, DoubleCircularLinkedList<String> personas, String lugar, String info,int i,DoubleCircularLinkedList<String> palabrasClaves) {
+        this.ruta = ruta;
+        this.personas = personas;
+        this.lugar = lugar;
+        this.fecha=LocalDate.now();
+        this.info=info;
+        if(i==1){
+            this.favorita=true;
+        }
+        this.palabrasClaves=palabrasClaves
+    }
+    */
     
     
     //metodos

@@ -8,6 +8,8 @@ package Classes;
 import Classes.Photo;
 import TDAs.DoubleCircularLinkedList;
 import java.time.LocalDate;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  *
@@ -82,6 +84,88 @@ public class Album {
         }
         return false;
     }
+    
+    //METODOS CON MAPAS
+    public DoubleCircularLinkedList<Photo> filtrarPorLugar(String lugar){
+        Map<String,DoubleCircularLinkedList<Photo>> fotosPorLugar=new LinkedHashMap<>();
+        for(Photo f:this.getFotos()){
+            fotosPorLugar.putIfAbsent(f.getLugar(), new DoubleCircularLinkedList<Photo>(f));
+            fotosPorLugar.get(f.getLugar()).addFirst(f);
+        }
+        
+        return fotosPorLugar.get(lugar);
+    }
+    
+    public DoubleCircularLinkedList<Photo> filtrarPorFecha(LocalDate fecha){
+        Map<LocalDate,DoubleCircularLinkedList<Photo>> fotosPorFecha=new LinkedHashMap<>();
+        for(Photo f:this.getFotos()){
+            fotosPorFecha.putIfAbsent(f.getFecha(), new DoubleCircularLinkedList<Photo>(f));
+            fotosPorFecha.get(f.getFecha()).addFirst(f);
+        }
+        
+        return fotosPorFecha.get(fecha);
+    }
+    //entrando una doublelinked
+    public DoubleCircularLinkedList<Photo> filtrarPorPersonas(DoubleCircularLinkedList<String> personas){
+        Map<DoubleCircularLinkedList<String>,DoubleCircularLinkedList<Photo>> fotosPorPersonas=new LinkedHashMap<>();
+        for(Photo f:this.getFotos()){
+            fotosPorPersonas.putIfAbsent(f.getPersonas(), new DoubleCircularLinkedList<Photo>(f));
+            fotosPorPersonas.get(f.getFecha()).addFirst(f);
+        }
+        
+        return fotosPorPersonas.get(personas);
+    }
+    
+    //entrando un string
+    public DoubleCircularLinkedList<Photo> filtrarPorPersona(String persona){
+        Map<String,DoubleCircularLinkedList<Photo>> fotosPorPersona=new LinkedHashMap<>();
+        for(Photo f:this.getFotos()){
+            for(String p:f.getPersonas()){
+                fotosPorPersona.putIfAbsent(p, new DoubleCircularLinkedList<Photo>(f));
+                fotosPorPersona.get(p).addFirst(f);
+            }
+            
+        }
+        
+        return fotosPorPersona.get(persona);
+    }
+    
+    public DoubleCircularLinkedList<Photo> filtrarPorFavorito(Boolean favorito){
+        Map<Boolean,DoubleCircularLinkedList<Photo>> fotosPorFavorito=new LinkedHashMap<>();
+        for(Photo f:this.getFotos()){
+            fotosPorFavorito.putIfAbsent(f.getFavorita(), new DoubleCircularLinkedList<Photo>(f));
+            fotosPorFavorito.get(f.getFavorita()).addFirst(f);
+        }
+        
+        return fotosPorFavorito.get(favorito);
+    }
+    
+    /*
+    public DoubleCircularLinkedList<Photo> filtrarPorPalabrasClaves(DoubleCircularLinkedList<String> palabrasClaves){
+        Map<DoubleCircularLinkedList<String>,DoubleCircularLinkedList<Photo>> fotosPorPalabrasClaves=new LinkedHashMap<>();
+        for(Photo f:this.getFotos()){
+            fotosPorPalabrasClaves.putIfAbsent(f.getPalabrasClaves(), new DoubleCircularLinkedList<Photo>(f));
+            fotosPorPalabrasClaves.get(f.getPalabrasClaves()).addFirst(f);
+        }
+        
+        return fotosPorPalabrasClaves.get(palabrasClaves);
+    }
+    
+    public DoubleCircularLinkedList<Photo> filtrarPorPalbraClave(String palabraClave){
+        Map<String,DoubleCircularLinkedList<Photo>> fotosPorPalabraClave=new LinkedHashMap<>();
+        for(Photo f:this.getFotos()){
+            for(String pal:f.getPalabrasClave()){
+                fotosPorPersona.putIfAbsent(pal, new DoubleCircularLinkedList<Photo>(f));
+                fotosPorPersona.get(pal).addFirst(f);
+            }
+            
+        }
+        
+        return fotosPorPalabraClave.get(palabraClave);
+    }
+    */
+    
+    
     //return false;}
     
     @Override
