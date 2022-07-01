@@ -23,7 +23,10 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.CustomMenuItem;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuButton;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TitledPane;
@@ -54,6 +57,26 @@ public class Ventana_AlbumController implements Initializable {
     private AnchorPane tablero;
     @FXML
     private VBox tabliew;
+    @FXML
+    private TreeView<?> list_Album1;
+    @FXML
+    private Label lbl_NombreAlbum;
+    @FXML
+    private Label lbl_DescripcionAlbum;
+    @FXML
+    private Button btn_EditNombreA;
+    @FXML
+    private Button btn_EditDescripcionA;
+    @FXML
+    private AnchorPane tablero1;
+    @FXML
+    private VBox tabliew1;
+    @FXML
+    private Button btn_CrearAlbum;
+    @FXML
+    private Button btn_ImportarFoto;
+    @FXML
+    private MenuButton comboBox_Filtro;
 
 
     /**
@@ -80,6 +103,13 @@ public class Ventana_AlbumController implements Initializable {
             Logger.getLogger(Ventana_AlbumController.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+        CheckBox cb0 = new CheckBox("Personas");  
+        CustomMenuItem item0 = new CustomMenuItem(cb0);  
+        CheckBox cb1 = new CheckBox("Lugar");  
+        CustomMenuItem item1 = new CustomMenuItem(cb1);  
+        item0.setHideOnClick(false);  
+        item1.setHideOnClick(false);  
+        comboBox_Filtro.getItems().setAll(item0,item1);
 
 
       
