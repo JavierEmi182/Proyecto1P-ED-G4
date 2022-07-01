@@ -47,7 +47,7 @@ import javafx.scene.layout.VBox;
 public class Ventana_AlbumController implements Initializable {
 
     @FXML
-    private TreeView<String> list_Album;
+    private TreeView<Album> list_Album;
     @FXML
     private Label nombre_Album;
     @FXML
@@ -86,24 +86,25 @@ public class Ventana_AlbumController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
 
         try {
-            int c=0;
-            TreeItem rootItem = new TreeItem("Albumes   "+ "(" + c + ")");
+            
+            int c = 0;
+            TreeItem rootItem = new TreeItem(/*"Albumes   "+ "(" + c + ")"*/);
             
             //DoubleCircularLinkedList<Photo> fotos = leerFotos("/archivos/fotosUsuario.txt");
             //recursos/textos/fotosUsuario.txt
             DoubleCircularLinkedList<Photo> fotos = leerFotos("recursos/textos/fotosUsuario.txt");
-            
             DoubleCircularLinkedList<Album> albumes = leerAlbumes("recursos/textos/albumesUsuario.txt",fotos);
-           
-            
+             
             //"file:recursos/fotos/"+f.getRuta();
             for (NodeList<Album> t = albumes.getFirst(); !t.getNext().equals(albumes.getFirst()); t = t.getNext()) {
                 
-                TreeItem item = new TreeItem(t.getContent().getNombre());
+                TreeItem<Album> item = new TreeItem(t);
                 rootItem.getChildren().add(item);
                 c++;     
             }
+            //list_Album.getTreeItem(0).getValue().setNombre("Albumes   "+ "(" + c + ")");
             list_Album.setRoot(rootItem); 
+            //list_Album.getTreeItem(0).getValue().setNombre("Albumes   "+ "(" + c + ")");
             
         } catch (IOException ex) {
             Logger.getLogger(Ventana_AlbumController.class.getName()).log(Level.SEVERE, null, ex);
@@ -123,36 +124,35 @@ public class Ventana_AlbumController implements Initializable {
 
     @FXML
     private void mouseClickSelected(MouseEvent event) throws IOException {
-        TreeItem item_Seleccionado = list_Album.getSelectionModel().getSelectedItem();
+        TreeItem <Album> item_Seleccionado = list_Album.getSelectionModel().getSelectedItem();
+        //list_Album.getSelectionModel().getSelectedItem();
         TreeItem item_Root= list_Album.getTreeItem(0);
-        
+        //if(item_Root ==  )
+        //String nombre_AlbumJAJA = item_Seleccionado.getValue().getNombre();
+        //nombre_Album.setText(nombre_AlbumJAJA); 
+        /*
         if(item_Seleccionado != item_Root){
             tabliew.getChildren().removeAll();   
-            DoubleCircularLinkedList<Photo> fotos = leerFotos("/archivos/fotosUsuario.txt");
-            DoubleCircularLinkedList<Album> albumes = leerAlbumes("/archivos/albumesUsuario.txt",fotos);
+            DoubleCircularLinkedList<Photo> fotos = leerFotos("recursos/textos/fotosUsuario.txt");
+            DoubleCircularLinkedList<Album> albumes = leerAlbumes("recursos/textos/albumesUsuario.txt",fotos);
             //VBox vboxPhoto = new VBox();
             DoubleCircularLinkedList<Photo> fotosAlbum = null;
            
             for (NodeList<Album> t = albumes.getFirst(); !t.getNext().equals(albumes.getFirst()); t = t.getNext()) {
                 if(t.getContent().getNombre().equals(item_Seleccionado.getValue().toString()) ){
                     nombre_Album.setText(t.getContent().getNombre()); 
-                    fotosAlbum = t.getContent().getFotos();
-                    
-                    for (Photo p :fotos){
-                        Label lnombre = new Label(p.getInfo());
-                        tabliew.getChildren().add(lnombre);
-                    }  
+                    //fotosAlbum = t.getContent().getFotos();
                     
                 } 
               
             }
             
-        }   
+        }   */
     }
 
-    @FXML
+   /* @FXML
     private void mouseClickSelected(ContextMenuEvent event) {
-    }
+    }*/
 
 
 
