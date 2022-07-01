@@ -88,9 +88,15 @@ public class Ventana_AlbumController implements Initializable {
         try {
             int c=0;
             TreeItem rootItem = new TreeItem("Albumes   "+ "(" + c + ")");
-            DoubleCircularLinkedList<Photo> fotos = leerFotos("/archivos/fotosUsuario.txt");
-            DoubleCircularLinkedList<Album> albumes = leerAlbumes("/archivos/albumesUsuario.txt",fotos);
+            
+            //DoubleCircularLinkedList<Photo> fotos = leerFotos("/archivos/fotosUsuario.txt");
+            //recursos/textos/fotosUsuario.txt
+            DoubleCircularLinkedList<Photo> fotos = leerFotos("recursos/textos/fotosUsuario.txt");
+            
+            DoubleCircularLinkedList<Album> albumes = leerAlbumes("recursos/textos/albumesUsuario.txt",fotos);
            
+            
+            //"file:recursos/fotos/"+f.getRuta();
             for (NodeList<Album> t = albumes.getFirst(); !t.getNext().equals(albumes.getFirst()); t = t.getNext()) {
                 
                 TreeItem item = new TreeItem(t.getContent().getNombre());
