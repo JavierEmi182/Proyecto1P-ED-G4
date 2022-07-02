@@ -77,7 +77,9 @@ public class Ventana_AlbumController implements Initializable {
     private Button btn_ImportarFoto;
     @FXML
     private MenuButton comboBox_Filtro;
-
+    
+    // foto que necesito en la ventana de editar foto cuando se de clic en ella
+    public Photo foto;
 
     /**
      * Initializes the controller class.
@@ -154,7 +156,13 @@ public class Ventana_AlbumController implements Initializable {
     private void mouseClickSelected(ContextMenuEvent event) {
     }*/
 
-
+    public void setPhoto(Photo foto){
+        this.foto=foto;
+    }
+    
+    public Photo getPhoto(){
+        return this.foto;
+    }
 
     
 }

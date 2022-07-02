@@ -4,11 +4,13 @@
  */
 package estructuradatos.Proyecto1P;
 
+import Classes.Photo;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TreeView;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
@@ -32,12 +34,19 @@ public class FotoEditableController implements Initializable {
     @FXML
     private TreeView<?> TreeViewPersonas;
 
+    public Photo foto;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        
+        Ventana_AlbumController ctrl_anterior= new Ventana_AlbumController();
+        foto = ctrl_anterior.getPhoto();
+        Image i= new Image("file:recursos/fotos/"+foto.getRuta());
+        ImageView imgv= new ImageView(i);
+        VboxFoto.getChildren().addAll(imgv);
     }    
 
     @FXML
