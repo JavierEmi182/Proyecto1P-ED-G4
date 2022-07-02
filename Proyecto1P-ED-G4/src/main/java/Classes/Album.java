@@ -96,6 +96,16 @@ public class Album {
         return fotosPorLugar.get(lugar);
     }
     
+    public Map<String,Integer> contadorPorLugar(String lugar){
+        Map<String,Integer> contadorPorLugar=new LinkedHashMap<>();
+        for(Photo f:this.getFotos()){
+            contadorPorLugar.putIfAbsent(f.getLugar(), 1);
+            contadorPorLugar.put(f.getLugar(),contadorPorLugar.get(f.getLugar())+1);
+        }
+        
+        return contadorPorLugar;
+    }
+    
     public DoubleCircularLinkedList<Photo> filtrarPorFecha(LocalDate fecha){
         Map<LocalDate,DoubleCircularLinkedList<Photo>> fotosPorFecha=new LinkedHashMap<>();
         for(Photo f:this.getFotos()){
@@ -130,6 +140,17 @@ public class Album {
         return fotosPorPersona.get(persona);
     }
     
+    public Map<String,Integer> contadorPorPersona(String lugar){
+        Map<String,Integer> contadorPorPersona=new LinkedHashMap<>();
+        for(Photo f:this.getFotos()){
+            for(String p:f.getPersonas()){
+                contadorPorPersona.putIfAbsent(p, 1);
+                contadorPorPersona.put(p,contadorPorPersona.get(p)+1);
+            }
+        }
+        return contadorPorPersona;
+    }
+    
     public DoubleCircularLinkedList<Photo> filtrarPorFavorito(Boolean favorito){
         Map<Boolean,DoubleCircularLinkedList<Photo>> fotosPorFavorito=new LinkedHashMap<>();
         for(Photo f:this.getFotos()){
@@ -138,6 +159,15 @@ public class Album {
         }
         
         return fotosPorFavorito.get(favorito);
+    }
+    
+    public Map<Boolean,Integer> contadorPorFavorito(String lugar){
+        Map<Boolean,Integer> contadorPorFavorito=new LinkedHashMap<>();
+        for(Photo f:this.getFotos()){
+                contadorPorFavorito.putIfAbsent(f.getFavorita(), 1);
+                contadorPorFavorito.put(f.getFavorita(),contadorPorFavorito.get(f.getFavorita())+1);
+        }
+        return contadorPorFavorito;
     }
     
     /*
@@ -162,6 +192,17 @@ public class Album {
         }
         
         return fotosPorPalabraClave.get(palabraClave);
+    }
+    
+    public Map<String,Integer> contadorPorPalbraClave(String lugar){
+        Map<String,Integer> contadorPorPalbraClave=new LinkedHashMap<>();
+        for(Photo f:this.getFotos()){
+            for(String pal:f.getPalabrasClave()){
+                contadorPorPalbraClave.putIfAbsent(pal, 1);
+                contadorPorPalbraClave.put(pal,contadorPorPalbraClave.get(pal)+1);
+            }
+        }
+        return contadorPorPalbraClave;
     }
     */
     
