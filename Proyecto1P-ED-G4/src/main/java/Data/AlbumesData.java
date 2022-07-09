@@ -70,7 +70,7 @@ public class AlbumesData {
                         for(String s:partesFotos){
                             for(Photo f:fotosCompletas){
                                 if(s.equals(f.getRuta())){
-                                    //System.out.println(s+" coincidio con "+f.getRuta());
+                                   // System.out.println(s+" coincidio con "+f.getRuta());
                                     fotosAlbum.addFirst(f);
                             }
                         }

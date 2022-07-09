@@ -24,10 +24,8 @@ public class Album {
         this.nombre=null;
         this.fotos=null;
         this.fechaCreacion=null;
-}
-
-    
-    
+    }
+  
     //getters and setters
 
     public String getNombre() {

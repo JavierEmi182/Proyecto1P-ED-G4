@@ -92,9 +92,14 @@ public class Ventana_AlbumController implements Initializable {
             int c = albumes.size();
 
             TreeItem rootItem = new TreeItem("Albumes " + " (" + c + ")");
-
-            for (NodeList<Album> t = albumes.getFirst(); !t.getNext().equals(albumes.getFirst()); t = t.getNext()) {
-                TreeItem item = new TreeItem(t.getContent().getNombre());
+            if(c == 1){
+                TreeItem item = new TreeItem(albumes.getFirst().getContent().getNombre());
+                rootItem.getChildren().add(item);
+            }
+            
+            for (Album a: albumes) {
+                
+                TreeItem item = new TreeItem(a.getNombre());
                 rootItem.getChildren().add(item);
             }
 
@@ -151,15 +156,29 @@ public class Ventana_AlbumController implements Initializable {
 
             }
         };*/
+        
+        int c = albumes.size();
+        
+        if(c == 1){
+            if (itemSeleccionado.equals(albumes.getFirst().getContent().getNombre())) {
+                albumes.getFirst().getContent().getFotos();
+            }
+            
+        }
 
-        for (NodeList<Album> t = albumes.getFirst(); !t.getNext().equals(albumes.getFirst()); t = t.getNext()) {
-
-            if (itemSeleccionado.equals(t.getContent().getNombre())) {
+        for (Album a: albumes) {
+            
+            //System.out.println(a);
+            
+            if (itemSeleccionado.equals(a.getNombre())) {
                 //t.getContent().getFotos()
-                for (Photo p : fotos) {
-                    if (p != null) {
+                for (Photo p : a.getFotos()) {
+                    System.out.println(p);
+
+                    //if (p != null) {
                         //VBox vboxmenu = new VBox();   
                         Image i = new Image("file:recursos/fotos/" + p.getRuta());
+                        
                         ImageView imgv = new ImageView(i);
                         imgv.setFitHeight(185);
                         imgv.setFitWidth(275);
@@ -175,7 +194,7 @@ public class Ventana_AlbumController implements Initializable {
                         vboxmenu.setPadding(new Insets(2, 3, 3, 4));
                         System.out.println("***");
 
-                    }
+                    //}
                 }
 
             }
