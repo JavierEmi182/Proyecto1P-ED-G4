@@ -155,7 +155,7 @@ public class Ventana_AlbumController implements Initializable {
         for (NodeList<Album> t = albumes.getFirst(); !t.getNext().equals(albumes.getFirst()); t = t.getNext()) {
 
             if (itemSeleccionado.equals(t.getContent().getNombre())) {
-                //
+                //t.getContent().getFotos()
                 for (Photo p : fotos) {
                     if (p != null) {
                         //VBox vboxmenu = new VBox();   
@@ -182,6 +182,7 @@ public class Ventana_AlbumController implements Initializable {
 
         }
         scrollpaneBiblio.setContent(vboxmenu);
+        scrollpaneEdi.setContent(vboxmenu);
 
     }
 
@@ -223,6 +224,17 @@ public class Ventana_AlbumController implements Initializable {
         stage.setScene(scene);
         stage.show();
         root.autosize();    
+    }
+
+    @FXML
+    private void listaAlbumesEdicion(MouseEvent event) throws IOException {
+        TreeItem<String> item_Seleccionado = list_Album1.getSelectionModel().getSelectedItem();
+        TreeItem<String> item_Root = list_Album1.getTreeItem(0);
+        if (item_Seleccionado != item_Root) {
+            nombreAlbum1.setText(item_Seleccionado.getValue());
+            mostrarImagenesXAlbum(item_Seleccionado.getValue());
+
+        }
     }
 
 }
