@@ -117,6 +117,8 @@ public class Ventana_AlbumController implements Initializable {
             list_Album.setRoot(rootItem);
             list_Album1.setRoot(rootItem);
             
+            
+            
             nombreAlbum.setText(albumes.getLast().getContent().getNombre());
             nombreAlbum1.setText(albumes.getLast().getContent().getNombre());
             
@@ -195,7 +197,7 @@ public class Ventana_AlbumController implements Initializable {
         root.autosize();
     }
 
-    public void mostrarImagenesXAlbum(String itemSeleccionado) throws IOException {
+    private void mostrarImagenesXAlbum(String itemSeleccionado) throws IOException {
 
         DoubleCircularLinkedList<Photo> fotos = leerFotos("recursos/textos/fotosUsuario.txt");
         DoubleCircularLinkedList<Album> albumes = leerAlbumes("recursos/textos/albumesUsuario.txt", fotos);
