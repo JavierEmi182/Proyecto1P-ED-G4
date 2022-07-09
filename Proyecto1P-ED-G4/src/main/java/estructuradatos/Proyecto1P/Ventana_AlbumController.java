@@ -19,6 +19,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -35,6 +36,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.ScrollBar;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TitledPane;
 import javafx.scene.control.TreeItem;
@@ -44,6 +46,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -77,6 +80,14 @@ public class Ventana_AlbumController implements Initializable {
     private ScrollPane scrollpaneBiblio;
     @FXML
     private ScrollPane scrollpaneEdi;
+    @FXML
+    private FlowPane panel;
+    @FXML
+    private FlowPane panelEdicion;
+    @FXML
+    private Tab biblioteca;
+    @FXML
+    private Tab edicion;
 
     /**
      * Initializes the controller class.
@@ -92,20 +103,25 @@ public class Ventana_AlbumController implements Initializable {
             int c = albumes.size();
 
             TreeItem rootItem = new TreeItem("Albumes " + " (" + c + ")");
-            if(c == 1){
+
+            if (c == 1) {
                 TreeItem item = new TreeItem(albumes.getFirst().getContent().getNombre());
                 rootItem.getChildren().add(item);
             }
-            
-            for (Album a: albumes) {
-                
+
+            for (Album a : albumes) {
                 TreeItem item = new TreeItem(a.getNombre());
                 rootItem.getChildren().add(item);
             }
-
+            
             list_Album.setRoot(rootItem);
             list_Album1.setRoot(rootItem);
-
+            
+            nombreAlbum.setText(albumes.getLast().getContent().getNombre());
+            nombreAlbum1.setText(albumes.getLast().getContent().getNombre());
+            
+            mostrarImagenesXAlbum(albumes.getLast().getContent().getNombre());
+ 
         } catch (IOException ex) {
             Logger.getLogger(Ventana_AlbumController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -121,10 +137,26 @@ public class Ventana_AlbumController implements Initializable {
 
     @FXML
     private void listaAlbumes(MouseEvent event) throws IOException {
+
         TreeItem<String> item_Seleccionado = list_Album.getSelectionModel().getSelectedItem();
         TreeItem<String> item_Root = list_Album.getTreeItem(0);
+
         if (item_Seleccionado != item_Root) {
+            panel.getChildren().clear();
             nombreAlbum.setText(item_Seleccionado.getValue());
+            mostrarImagenesXAlbum(item_Seleccionado.getValue());
+        }
+
+    }
+
+    @FXML
+    private void listaAlbumesEdicion(MouseEvent event) throws IOException {
+        TreeItem<String> item_Seleccionado = list_Album1.getSelectionModel().getSelectedItem();
+        TreeItem<String> item_Root = list_Album1.getTreeItem(0);
+
+        if (item_Seleccionado != item_Root) {
+            panelEdicion.getChildren().clear();
+            nombreAlbum1.setText(item_Seleccionado.getValue());
             mostrarImagenesXAlbum(item_Seleccionado.getValue());
 
         }
@@ -132,80 +164,8 @@ public class Ventana_AlbumController implements Initializable {
 
     @FXML
     private void crearAlbum(MouseEvent event) {
-        
-    }
-
-    public void mostrarImagenesXAlbum(String itemSeleccionado) throws IOException {
-
-        DoubleCircularLinkedList<Photo> fotos = leerFotos("recursos/textos/fotosUsuario.txt");
-        DoubleCircularLinkedList<Album> albumes = leerAlbumes("recursos/textos/albumesUsuario.txt", fotos);
-
-        ScrollBar s = new ScrollBar();
-        s.setMin(0);
-        s.setMax(200);
-        s.setValue(110);
-        s.setOrientation(Orientation.VERTICAL);
-        s.setUnitIncrement(12);
-        s.setBlockIncrement(10);
-        VBox vboxmenu = new VBox();
-
-        /*Comparator<Album> cmpAlbum = new Comparator<>() {
-            @Override
-            public int compare(Album a1, Album a2) {
-                return a1.getNombre().compareTo(a2.getNombre());
-
-            }
-        };*/
-        
-        int c = albumes.size();
-        
-        if(c == 1){
-            if (itemSeleccionado.equals(albumes.getFirst().getContent().getNombre())) {
-                albumes.getFirst().getContent().getFotos();
-            }
-            
-        }
-
-        for (Album a: albumes) {
-            
-            //System.out.println(a);
-            
-            if (itemSeleccionado.equals(a.getNombre())) {
-                //t.getContent().getFotos()
-                for (Photo p : a.getFotos()) {
-                    System.out.println(p);
-
-                    //if (p != null) {
-                        //VBox vboxmenu = new VBox();   
-                        Image i = new Image("file:recursos/fotos/" + p.getRuta());
-                        
-                        ImageView imgv = new ImageView(i);
-                        imgv.setFitHeight(185);
-                        imgv.setFitWidth(275);
-                        vboxmenu.getChildren().add(imgv);
-                        
-                        //nombre
-                        Label lnombre = new Label(p.getInfo());
-                        vboxmenu.getChildren().add(lnombre);
-                        
-                        //anio
-                        Label lprecio = new Label(String.valueOf(p.getFecha()));
-                        vboxmenu.getChildren().add(lprecio);
-                        vboxmenu.setPadding(new Insets(2, 3, 3, 4));
-                        System.out.println("***");
-
-                    //}
-                }
-
-            }
-
-        }
-        scrollpaneBiblio.setContent(vboxmenu);
-        scrollpaneEdi.setContent(vboxmenu);
 
     }
-
-    
 
     @FXML
     private void editarNombre_Album(MouseEvent event) {
@@ -215,24 +175,14 @@ public class Ventana_AlbumController implements Initializable {
     private void editarDescrip_Album(MouseEvent event) {
     }
 
-
     @FXML
     private void eliminarAlbum(MouseEvent event) {
-    }
-    
-    
-    public void setPhoto(Photo foto) {
-        this.foto = foto;
-    }
-
-    public Photo getPhoto() {
-        return this.foto;
     }
 
     @FXML
     private void importarFoto(ActionEvent event) throws IOException {
-        Node node = (Node)event.getSource();
-        Stage stage = (Stage)node.getScene().getWindow();
+        Node node = (Node) event.getSource();
+        Stage stage = (Stage) node.getScene().getWindow();
         stage.close();
         FXMLLoader f = new FXMLLoader(App.class.getResource("/fxml/FileChooser.fxml"));
         //sendData();
@@ -242,45 +192,109 @@ public class Ventana_AlbumController implements Initializable {
         //Stage stage = new Stage();
         stage.setScene(scene);
         stage.show();
-        root.autosize();    
+        root.autosize();
     }
 
-    @FXML
-    private void listaAlbumesEdicion(MouseEvent event) throws IOException {
-        TreeItem<String> item_Seleccionado = list_Album1.getSelectionModel().getSelectedItem();
-        TreeItem<String> item_Root = list_Album1.getTreeItem(0);
-        if (item_Seleccionado != item_Root) {
-            nombreAlbum1.setText(item_Seleccionado.getValue());
-            mostrarImagenesXAlbum(item_Seleccionado.getValue());
+    public void mostrarImagenesXAlbum(String itemSeleccionado) throws IOException {
+
+        DoubleCircularLinkedList<Photo> fotos = leerFotos("recursos/textos/fotosUsuario.txt");
+        DoubleCircularLinkedList<Album> albumes = leerAlbumes("recursos/textos/albumesUsuario.txt", fotos);
+
+        ScrollBar s = new ScrollBar();
+        s.setMin(0);
+        s.setMax(400);
+        s.setValue(400);
+        s.setOrientation(Orientation.VERTICAL);
+        s.setUnitIncrement(20);
+        s.setBlockIncrement(20);
+
+        /*Comparator<Album> cmpAlbum = new Comparator<>() {
+            @Override
+            public int compare(Album a1, Album a2) {
+                return a1.getNombre().compareTo(a2.getNombre());
+
+            }
+        };*/
+        int c = albumes.size();
+
+        if (c == 1) {
+            if (itemSeleccionado.equals(albumes.getFirst().getContent().getNombre())) {
+                /*DoubleCircularLinkedList<Photo> fotosAlbum = */
+                albumes.getFirst().getContent().getFotos();
+            }
 
         }
+
+        for (Album a : albumes) {
+            if (itemSeleccionado.compareTo(a.getNombre()) == 0) {
+                int contFotos = a.getFotos().size();
+                if (contFotos == 1) {
+                    Photo p = a.getFotos().getFirst().getContent();
+                    mostrarFotosPanel(p);
+                }
+                for (Photo p : a.getFotos()) {
+                    mostrarFotosPanel(p);
+                }
+            }
+        }
+    }
+
+    private void mostrarFotosPanel(Photo p) {
+        VBox vboxFoto = new VBox();
+        vboxFoto.setAlignment(Pos.CENTER);
+        Image i = new Image("file:recursos/fotos/" + p.getRuta());
+        ImageView imgv = new ImageView(i);
+        imgv.setFitHeight(100);
+        imgv.setFitWidth(100);
+        //System.out.println(imgv);
+        vboxFoto.getChildren().add(imgv);
+        //nombre
+        Label lnombre = new Label(p.getInfo());
+        vboxFoto.getChildren().add(lnombre);
+        //anio
+        Label lprecio = new Label(String.valueOf(p.getFecha()));
+        vboxFoto.getChildren().add(lprecio);
+        // vboxmenu.setPadding(new Insets(2, 3, 3, 4));
+        System.out.println("***");
+        
+        if(biblioteca.isSelected()){
+            panel.getChildren().add(vboxFoto);
+        }
+        
+        else if (edicion.isSelected()){
+            panelEdicion.getChildren().add(vboxFoto);
+        }
+
+
+        EventHandler eventHandler = (event) -> {
+            Node node = (Node) event.getSource();
+            Stage stage = (Stage) node.getScene().getWindow();
+            stage.close();
+            FXMLLoader f = new FXMLLoader(App.class.getResource("/fxml/VentanaVisualizacion.fxml"));
+            //sendData();
+            Parent root;
+            try {
+                root = f.load();
+                //stage.setUserData(albumSeleccionado);
+                Scene scene = new Scene(root);
+                //Stage stage = new Stage();
+                stage.setScene(scene);
+                stage.show();
+                root.autosize();
+            } catch (IOException ex) {
+                Logger.getLogger(Ventana_AlbumController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        };
+
+        vboxFoto.setOnMouseClicked(eventHandler);
+    }
+
+    public void setPhoto(Photo foto) {
+        this.foto = foto;
+    }
+
+    public Photo getPhoto() {
+        return this.foto;
     }
 
 }
-
-
-/*//descripcion_Album.setText(t.getContent());
-                    fotosAlbum  = t.getContent().getFotos();  
-                    for (Photo p :fotosAlbum){  
-                        VBox vboxPhoto = new VBox();
-                        InputStream inputImg= App.class.getResource("/fotoss/"+p.getRuta()).openStream();
-                        ImageView imgv = new ImageView(new Image(inputImg));
-                        imgv.setFitHeight(185);
-                        imgv.setFitWidth(275);
-                        vboxPhoto.getChildren().add(imgv);
-                        Label lprecio = new Label(String.valueOf(p.getFecha()));
-            vboxPhoto.getChildren().add(lprecio);
-                        tabliew.getChildren().add(vboxPhoto);
-                        //tablero_Fotos.getChildren().add(vboxPhoto);
-                        
-                    }
-                }
-            } 
-            
-            
-            
-           // tablero_Fotos.setContent(vboxPhoto);
-        }
-         
-        
-       // nombre_Album.setText(item_Seleccionado.getValue());    tablero_Fotos.setContent(vboxPhoto);   */
