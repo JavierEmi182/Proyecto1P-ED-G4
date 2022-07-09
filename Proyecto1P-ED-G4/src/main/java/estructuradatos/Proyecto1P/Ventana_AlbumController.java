@@ -14,19 +14,26 @@ import TDAs.NodeList;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.Comparator;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.CustomMenuItem;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
+import javafx.scene.control.ScrollBar;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TitledPane;
@@ -37,7 +44,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -49,33 +58,25 @@ public class Ventana_AlbumController implements Initializable {
     @FXML
     private TreeView<String> list_Album;
     @FXML
-    private Label nombre_Album;
+    private TreeView<String> list_Album1;
     @FXML
-    private Label descripcion_Album;
-    //private ScrollPane tablero_Fotos;
+    private HBox hBoxImgeneral;
     @FXML
-    private VBox tablero;
+    private Label nombreAlbum;
     @FXML
-    private TreeView<?> list_Album1;
+    private Label descricpcionAlbum;
     @FXML
-    private Label lbl_NombreAlbum;
+    private HBox hBoxImgeneral1;
     @FXML
-    private Label lbl_DescripcionAlbum;
+    private Label nombreAlbum1;
     @FXML
-    private Button btn_EditNombreA;
-    @FXML
-    private Button btn_EditDescripcionA;
-    @FXML
-    private AnchorPane tablero1;
-    @FXML
-    private VBox tabliew1;
-    @FXML
-    private Button btn_CrearAlbum;
-    @FXML
-    private Button btn_ImportarFoto;
-    
-    // foto que necesito en la ventana de editar foto cuando se de clic en ella
+    private Label descricpcionAlbum1;
+
     public Photo foto;
+    @FXML
+    private ScrollPane scrollpaneBiblio;
+    @FXML
+    private ScrollPane scrollpaneEdi;
 
     /**
      * Initializes the controller class.
@@ -86,27 +87,24 @@ public class Ventana_AlbumController implements Initializable {
         try {
             //"file:recursos/fotos/"+f.getRuta();
             DoubleCircularLinkedList<Photo> fotos = leerFotos("recursos/textos/fotosUsuario.txt");
-            DoubleCircularLinkedList<Album> albumes = leerAlbumes("recursos/textos/albumesUsuario.txt",fotos);
-            
+            DoubleCircularLinkedList<Album> albumes = leerAlbumes("recursos/textos/albumesUsuario.txt", fotos);
+
             int c = albumes.size();
-            
-            TreeItem rootItem = new TreeItem("Albumes "+" ("+c+")");
-            
+
+            TreeItem rootItem = new TreeItem("Albumes " + " (" + c + ")");
+
             for (NodeList<Album> t = albumes.getFirst(); !t.getNext().equals(albumes.getFirst()); t = t.getNext()) {
-                
                 TreeItem item = new TreeItem(t.getContent().getNombre());
                 rootItem.getChildren().add(item);
-
-                   
             }
-            
-            list_Album.setRoot(rootItem); 
-            
-            
+
+            list_Album.setRoot(rootItem);
+            list_Album1.setRoot(rootItem);
+
         } catch (IOException ex) {
             Logger.getLogger(Ventana_AlbumController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         /*CheckBox cb0 = new CheckBox("Personas");  
         CustomMenuItem item0 = new CustomMenuItem(cb0);  
         CheckBox cb1 = new CheckBox("Lugar");  
@@ -114,108 +112,119 @@ public class Ventana_AlbumController implements Initializable {
         item0.setHideOnClick(false);  
         item1.setHideOnClick(false);  
         comboBox_Filtro.getItems().setAll(item0,item1);*/
-
-      
-    }   
+    }
 
     @FXML
-    private void mouseClickSelected(MouseEvent event) throws IOException {
-        tablero.getChildren().clear();
-        TreeItem <String> item_Seleccionado = list_Album.getSelectionModel().getSelectedItem();
-        TreeItem <String> item_Root= list_Album.getTreeItem(0);
-        
-        if(item_Seleccionado != item_Root){
-            //for (NodeList<Album> t = albumes.getFirst(); !t.getNext().equals(albumes.getFirst()); t = t.getNext()) {
-            nombre_Album.setText(item_Seleccionado.getValue());   
-            //VBox vboxmenu = new VBox();   
+    private void listaAlbumes(MouseEvent event) throws IOException {
+        TreeItem<String> item_Seleccionado = list_Album.getSelectionModel().getSelectedItem();
+        TreeItem<String> item_Root = list_Album.getTreeItem(0);
+        if (item_Seleccionado != item_Root) {
+            nombreAlbum.setText(item_Seleccionado.getValue());
             mostrarImagenesXAlbum(item_Seleccionado.getValue());
-            //Label lnombre = new Label(item_Seleccionado.getValue());
-            //tablero.getChildren().add(lnombre);
-           
+
         }
-        
-        
-        
-        
-        //if(item_Root ==  )
-        //String nombre_AlbumJAJA = item_Seleccionado.getValue().getNombre();
-        //nombre_Album.setText(nombre_AlbumJAJA); 
-        /*
-        if(item_Seleccionado != item_Root){
-            tabliew.getChildren().removeAll();   
-            DoubleCircularLinkedList<Photo> fotos = leerFotos("recursos/textos/fotosUsuario.txt");
-            DoubleCircularLinkedList<Album> albumes = leerAlbumes("recursos/textos/albumesUsuario.txt",fotos);
-            //VBox vboxPhoto = new VBox();
-            DoubleCircularLinkedList<Photo> fotosAlbum = null;
-           
-            for (NodeList<Album> t = albumes.getFirst(); !t.getNext().equals(albumes.getFirst()); t = t.getNext()) {
-                if(t.getContent().getNombre().equals(item_Seleccionado.getValue().toString()) ){
-                    nombre_Album.setText(t.getContent().getNombre()); 
-                    //fotosAlbum = t.getContent().getFotos();
-                    
-                } 
-              
-            }
-            
-        }   */
     }
 
-   /* @FXML
-    private void mouseClickSelected(ContextMenuEvent event) {
-    }*/
-    
-    public void mostrarImagenesXAlbum(String itemSeleccionado) throws IOException{
+    @FXML
+    private void crearAlbum(MouseEvent event) {
         
+    }
+
+    public void mostrarImagenesXAlbum(String itemSeleccionado) throws IOException {
+
         DoubleCircularLinkedList<Photo> fotos = leerFotos("recursos/textos/fotosUsuario.txt");
-        DoubleCircularLinkedList<Album> albumes = leerAlbumes("recursos/textos/albumesUsuario.txt",fotos);
-        for (NodeList<Album> t = albumes.getFirst(); !t.getNext().equals(albumes.getFirst()); t = t.getNext()) {
-            if(itemSeleccionado.equals(t.getContent().getNombre())){
-                for (Photo p :t.getContent().getFotos()){
-                    if(p!=null){
-                    VBox vboxmenu = new VBox();   
-                    Image i= new Image("file:recursos/fotos/"+p.getRuta());
-                    ImageView imgv= new ImageView(i);
-                    imgv.setFitHeight(185);
-                    imgv.setFitWidth(275);
-                    Label lnombre = new Label(p.getInfo());
-                    vboxmenu.getChildren().add(imgv);
-                    tablero.getChildren().add(lnombre);
-                    tablero.getChildren().add(vboxmenu);
-                        
-                    }
-                    
-                    
-                }
-                
+        DoubleCircularLinkedList<Album> albumes = leerAlbumes("recursos/textos/albumesUsuario.txt", fotos);
+
+        ScrollBar s = new ScrollBar();
+        s.setMin(0);
+        s.setMax(200);
+        s.setValue(110);
+        s.setOrientation(Orientation.VERTICAL);
+        s.setUnitIncrement(12);
+        s.setBlockIncrement(10);
+        VBox vboxmenu = new VBox();
+
+        /*Comparator<Album> cmpAlbum = new Comparator<>() {
+            @Override
+            public int compare(Album a1, Album a2) {
+                return a1.getNombre().compareTo(a2.getNombre());
+
             }
-        
+        };*/
+
+        for (NodeList<Album> t = albumes.getFirst(); !t.getNext().equals(albumes.getFirst()); t = t.getNext()) {
+
+            if (itemSeleccionado.equals(t.getContent().getNombre())) {
+                //
+                for (Photo p : fotos) {
+                    if (p != null) {
+                        //VBox vboxmenu = new VBox();   
+                        Image i = new Image("file:recursos/fotos/" + p.getRuta());
+                        ImageView imgv = new ImageView(i);
+                        imgv.setFitHeight(185);
+                        imgv.setFitWidth(275);
+                        vboxmenu.getChildren().add(imgv);
+                        
+                        //nombre
+                        Label lnombre = new Label(p.getInfo());
+                        vboxmenu.getChildren().add(lnombre);
+                        
+                        //anio
+                        Label lprecio = new Label(String.valueOf(p.getFecha()));
+                        vboxmenu.getChildren().add(lprecio);
+                        vboxmenu.setPadding(new Insets(2, 3, 3, 4));
+                        System.out.println("***");
+
+                    }
+                }
+
+            }
+
         }
-        
+        scrollpaneBiblio.setContent(vboxmenu);
+
     }
-        
-    
-    
-    
-    
-    
-    
-    
-    
+
     
 
-    public void setPhoto(Photo foto){
-        this.foto=foto;
+    @FXML
+    private void editarNombre_Album(MouseEvent event) {
+    }
+
+    @FXML
+    private void editarDescrip_Album(MouseEvent event) {
+    }
+
+
+    @FXML
+    private void eliminarAlbum(MouseEvent event) {
     }
     
-    public Photo getPhoto(){
+    
+    public void setPhoto(Photo foto) {
+        this.foto = foto;
+    }
+
+    public Photo getPhoto() {
         return this.foto;
     }
 
     @FXML
-    private void mouseClickSelected(ContextMenuEvent event) {
+    private void importarFoto(ActionEvent event) throws IOException {
+        Node node = (Node)event.getSource();
+        Stage stage = (Stage)node.getScene().getWindow();
+        stage.close();
+        FXMLLoader f = new FXMLLoader(App.class.getResource("/fxml/FileChooser.fxml"));
+        //sendData();
+        Parent root = f.load();
+        //stage.setUserData(albumSeleccionado);
+        Scene scene = new Scene(root);
+        //Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.show();
+        root.autosize();    
     }
 
-    
 }
 
 
