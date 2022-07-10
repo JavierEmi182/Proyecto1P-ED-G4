@@ -18,7 +18,9 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -50,6 +52,10 @@ public class VentanaVisualizacionController implements Initializable {
     Album albumDelNodo;
     @FXML
     private AnchorPane raiz;
+    @FXML
+    private Button btnVolver;
+    @FXML
+    private Button btnCargarFoto;
     /**
      * Initializes the controller class.
      */
@@ -145,6 +151,20 @@ public class VentanaVisualizacionController implements Initializable {
         
         Image i= new Image("file:recursos/fotos/"+fotoSeleccionada.getRuta());
         ivFotoCentral.setImage(i);
+    }
+
+    @FXML
+    private void volverVentana(ActionEvent event) throws IOException {
+        /*FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/Ventana_Album.fxml"));
+        Parent root = fxmlLoader.load();
+        stage.setScene(scene);
+        stage.show();*/
+        App.setRoot("/fxml/Ventana_Album.fxml");
+    }
+
+    @FXML
+    private void cargarFoto(ActionEvent event) {
+        
     }
     
 }

@@ -18,13 +18,19 @@ import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -54,12 +60,17 @@ public class FileChooserController implements Initializable {
     private String rutaAnterior;
     private File fileSeleccionado;
     private int i=0;
+    @FXML
+    private Button btnVolver;
+    @FXML
+    private Label lbMensajeError;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        lbMensajeError.setText("");
         // TODO
         btnBuscar.setOnAction(event -> {
         FileChooser fileChooser = new FileChooser();
@@ -89,8 +100,9 @@ public class FileChooserController implements Initializable {
 
     @FXML
     private void CrearImagen(ActionEvent event) throws IOException {
+        try{
         String[] direccion=fileSeleccionado.getAbsolutePath().split(Pattern.quote(File.separator));
-        System.out.println(direccion[0]);
+        //System.out.println(direccion[0]);
         //fileSeleccionado.copy(fileSeleccionado.getAbsolutePath(),"/Proyecto1P-ED-G4/target/classes/fotss");
         //System.out.println(fileSeleccionado.renameTo(new File("*/Proyecto1P-ED-G4/target/classes/fotoss/"+direccion[direccion.length-1]+".jpg")));
         //C:\Users\Javier\Documents\NetBeansProjects\Proyecto1P-ED-G4\Proyecto1P-ED-G4\target\classes\fotoss
@@ -146,7 +158,10 @@ public class FileChooserController implements Initializable {
                 //ingresarNuevoImagen(fotoSeleccionada,i);
             }  
         
-        
+        }catch(NullPointerException ex){
+            lbMensajeError.setText("Porfavor seleccione una imagen");
+            //System.out.println("Seleccione un album");
+        }
         
     }
 
@@ -157,6 +172,24 @@ public class FileChooserController implements Initializable {
         }else{
             i=0;
         }
+    }
+
+    @FXML
+    private void volverVentanaAlbum(ActionEvent event) throws IOException {
+        lbMensajeError.setText("");
+        //App.setRoot("/fxml/Ventana_Album.fxml");
+        Node node = (Node) event.getSource();
+        Stage stage = (Stage) node.getScene().getWindow();
+        stage.close();
+        FXMLLoader f = new FXMLLoader(App.class.getResource("/fxml/Ventana_Album.fxml"));
+        //sendData();
+        Parent root = f.load();
+        //stage.setUserData(albumSeleccionado);
+        Scene scene = new Scene(root);
+        //Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.show();
+        root.autosize();
     }
     
 }

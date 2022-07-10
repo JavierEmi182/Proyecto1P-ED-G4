@@ -162,12 +162,15 @@ public class Ventana_AlbumController implements Initializable {
 
         TreeItem<String> item_Seleccionado = list_Album.getSelectionModel().getSelectedItem();
         TreeItem<String> item_Root = list_Album.getTreeItem(0);
-
+        try{
         if (item_Seleccionado != item_Root) {
             panel.getChildren().clear();
             nombreAlbum.setText(item_Seleccionado.getValue());
             mostrarDescricpion(item_Seleccionado.getValue());
             mostrarImagenesXAlbum(item_Seleccionado.getValue());
+        }
+        }catch(NullPointerException ex){
+            System.out.println("Seleccione un album");
         }
 
     }
@@ -176,12 +179,15 @@ public class Ventana_AlbumController implements Initializable {
     private void listaAlbumesEdicion(MouseEvent event) throws IOException {
         TreeItem<String> item_Seleccionado = list_Album1.getSelectionModel().getSelectedItem();
         TreeItem<String> item_Root = list_Album1.getTreeItem(0);
-
+        try{
         if (item_Seleccionado != item_Root) {
             panelEdicion.getChildren().clear();
             nombreAlbum1.setText(item_Seleccionado.getValue());
             mostrarDescricpion(item_Seleccionado.getValue());
             mostrarImagenesXAlbum(item_Seleccionado.getValue());
+        }
+        }catch(NullPointerException ex){
+            System.out.println("Seleccione un album");
         }
     }
 
@@ -321,9 +327,11 @@ public class Ventana_AlbumController implements Initializable {
             stage.close();
             FXMLLoader f = new FXMLLoader(App.class.getResource("/fxml/VentanaVisualizacion.fxml"));
             //sendData();
+            //AQUI DEBO REALIZAR EL SEND DATA
             Parent root;
             try {
                 root = f.load();
+                //stage.setUserData(f);
                 //stage.setUserData(albumSeleccionado);
                 Scene scene = new Scene(root);
                 //Stage stage = new Stage();
