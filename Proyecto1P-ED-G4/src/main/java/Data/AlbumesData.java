@@ -62,11 +62,11 @@ public class AlbumesData {
                     }*/
                     
                     DoubleCircularLinkedList<Photo> fotosAlbum= new DoubleCircularLinkedList<>();
-                    if(partes[1].equals("null")){
+                    if(partes[2].equals("null")){
                         System.out.println("Album vacio");
                         //personas=null;
                     }else{
-                        String[] partesFotos=partes[1].split("-");
+                        String[] partesFotos=partes[2].split("-");
                         for(String s:partesFotos){
                             for(Photo f:fotosCompletas){
                                 if(s.equals(f.getRuta())){
@@ -78,16 +78,16 @@ public class AlbumesData {
                     }
                     }
                    // System.out.println("Album: "+fotosAlbum);
-                    if(partes[2].equals("null")){
+                    if(partes[3].equals("null")){
                         //System.out.println("Deberia entrar aqui");
-                        Album albumAñadir= new Album(partes[0],fotosAlbum,LocalDate.now());
+                        Album albumAñadir= new Album(partes[0],fotosAlbum,LocalDate.now(),partes[1]);
                         //System.out.println("album añadir es: "+albumAñadir);
                         albumes.addFirst(albumAñadir);
                         //albumes.addFirst(new Album(partes[0],fotosAlbum,LocalDate.now()));
                         //System.out.println("tuvo que añadirse a albumes");
                         //System.out.println(partes[0]+fotosAlbum+LocalDate.now());
                     }else{
-                        albumes.addFirst(new Album(partes[0],fotosAlbum,LocalDate.parse(partes[2])));
+                        albumes.addFirst(new Album(partes[0],fotosAlbum,LocalDate.parse(partes[3])));
                     }
 
                 }
@@ -125,7 +125,7 @@ public class AlbumesData {
             /*if(foto.getFavorita()==true){
                 i=1;
             }*/
-            String linea =album.getNombre()+fotos+";"+album.getFechaCreacion();
+            String linea =album.getNombre()+";"+album.getDescripcion()+";"+fotos+";"+album.getFechaCreacion();
             bw.write(linea);
             bw.close();
             
@@ -192,7 +192,7 @@ public class AlbumesData {
         
         
         String[] editarLinea=lineas[a].split(";");
-        String nuevaLinea=editarLinea[0]+";"+editarLinea[1]+"-"+nuevaImagen.getRuta()+";"+editarLinea[2];
+        String nuevaLinea=editarLinea[0]+";"+editarLinea[1]+";"+editarLinea[2]+"-"+nuevaImagen.getRuta()+";"+editarLinea[3];
         /*System.out.println("lineas a :"+lineas[a]);
         System.out.println(nuevaLinea);*/
         //String fotosFavoritas[]=lineas[1].split("-");
@@ -287,7 +287,7 @@ public class AlbumesData {
     
     public static void sobreescribirAlbum(String ruta,Album album) throws IOException{
         int numLinea=getLineadeNombreAlbum(ruta,album.getNombre());
-        String nuevaLinea=album.getNombre()+";"+album.getFotos().toString().substring(1, album.getFotos().toString().length()-1).replaceAll(",", "-")+";"+album.getFechaCreacion().toString();
+        String nuevaLinea=album.getNombre()+";"+album.getDescripcion()+";"+album.getFotos().toString().substring(1, album.getFotos().toString().length()-1).replaceAll(",", "-")+";"+album.getFechaCreacion().toString();
         ingresar(ruta,nuevaLinea,numLinea);
     }
     

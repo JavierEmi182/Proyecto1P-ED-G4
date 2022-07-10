@@ -19,11 +19,13 @@ public class Album {
     String nombre;
     DoubleCircularLinkedList<Photo> fotos;
     LocalDate fechaCreacion;
+    String descripcion;
 
     public Album() {
         this.nombre=null;
         this.fotos=null;
         this.fechaCreacion=null;
+        this.descripcion=null;
     }
   
     //getters and setters
@@ -51,20 +53,43 @@ public class Album {
     public void setFechaCreacion(LocalDate fechaCreacion) {
         this.fechaCreacion = fechaCreacion;
     }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+    
+    
     
     
     //constructor
 
-    public Album(String nombre, DoubleCircularLinkedList<Photo> fotos) {
+    public Album(String nombre, DoubleCircularLinkedList<Photo> fotos, String descripcion) {
         this.nombre = nombre;
         this.fotos = fotos;
         this.fechaCreacion=LocalDate.now();
+        this.descripcion=descripcion;
+        
     }
     //constructor recibiendo un LocalDate
+    public Album(String nombre, DoubleCircularLinkedList<Photo> fotosAlbum, LocalDate fecha, String descripcion) {
+        this.nombre = nombre;
+        this.fotos = fotosAlbum;
+        this.fechaCreacion=fecha;
+        this.descripcion=descripcion;
+        
+    }
+    
+    //constructor sin descripcion
     public Album(String nombre, DoubleCircularLinkedList<Photo> fotosAlbum, LocalDate fecha) {
         this.nombre = nombre;
         this.fotos = fotosAlbum;
         this.fechaCreacion=fecha;
+        this.descripcion=nombre;  //si no le ingresa descripcion,coge el nombre como descripcion
+        
     }
     
     //metodos

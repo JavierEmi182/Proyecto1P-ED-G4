@@ -1,3 +1,3 @@
-AlbumTodas;EscenaMarvel.jpg-foco.jpg-girasol.jpg-mariposa.jpg;null
-AlbumFavoritos;EscenaMarvel.jpg-foco.jpg;null
-Album1;mariposa.jpg;null
+AlbumTodas;Album de todas las fotos;EscenaMarvel.jpg-foco.jpg-girasol.jpg-mariposa.jpg-EncuentroTitan.jpg-PeleaTitan.jpg;null
+AlbumFavoritos;Album de las fotos favoritas;EscenaMarvel.jpg-foco.jpg;null
+Album1;Primer Album creado;mariposa.jpg;null
