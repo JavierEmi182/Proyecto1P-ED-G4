@@ -61,6 +61,8 @@ public class VentanaVisualizacionController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        Image i = new Image("file:recursos/fotos/"+Ventana_AlbumController.foto.getRuta());
+        ivFotoCentral.setImage(i);
         // TODO
         //NECESITO VER COMO CONSEGUIR EL NODO Y EL ALBUM (TAL VEZ UN STRING CON: NOMBREALBUM;FOTO
         //HAGO UN SPLIT Y BUSCO EN EL TXT LOS VALORES

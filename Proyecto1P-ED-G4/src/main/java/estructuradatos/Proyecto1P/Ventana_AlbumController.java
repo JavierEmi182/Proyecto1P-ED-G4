@@ -75,7 +75,8 @@ public class Ventana_AlbumController implements Initializable {
     @FXML
     private Label descricpcionAlbum1;
 
-    public Photo foto;
+    public static Photo foto;
+    public static Album album;
     @FXML
     private ScrollPane scrollpaneBiblio;
     @FXML
@@ -285,6 +286,7 @@ public class Ventana_AlbumController implements Initializable {
 
         for (Album a : albumes) {
             if (itemSeleccionado.compareTo(a.getNombre()) == 0) {
+                Ventana_AlbumController.album=a;
                 int contFotos = a.getFotos().size();
                 if (contFotos == 1) {
                     Photo p = a.getFotos().getFirst().getContent();
@@ -330,6 +332,7 @@ public class Ventana_AlbumController implements Initializable {
             //AQUI DEBO REALIZAR EL SEND DATA
             Parent root;
             try {
+                Ventana_AlbumController.foto=p;
                 root = f.load();
                 //stage.setUserData(f);
                 //stage.setUserData(albumSeleccionado);
