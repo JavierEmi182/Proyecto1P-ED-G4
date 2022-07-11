@@ -7,11 +7,18 @@ package estructuradatos.Proyecto1P;
 import Classes.Album;
 import Classes.Photo;
 import TDAs.DoubleCircularLinkedList;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -26,6 +33,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -119,7 +127,7 @@ public class FotoEditableController implements Initializable {
 
     @FXML
     private void EliminarFoto(MouseEvent event) {
-        
+        cargarVentanaAnterior(event);
         
     }
 
@@ -134,7 +142,24 @@ public class FotoEditableController implements Initializable {
         for(String s:nuevas_personas){
             System.out.println(s);
         }
-        
+        cargarVentanaAnterior(event);
+    }
+    
+    public void cargarVentanaAnterior(MouseEvent event){
+        Node node = (Node)event.getSource();
+        Stage stage = (Stage)node.getScene().getWindow();
+        stage.close();
+        FXMLLoader f = new FXMLLoader(App.class.getResource("/fxml/VentanaVisualizacion.fxml"));
+            Parent root;
+            try {
+                root = f.load();
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
+                root.autosize();
+            } catch (IOException ex) {
+                Logger.getLogger(Ventana_AlbumController.class.getName()).log(Level.SEVERE, null, ex);
+            }
     }
     
 }
