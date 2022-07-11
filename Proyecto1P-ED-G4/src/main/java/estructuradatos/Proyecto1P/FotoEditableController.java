@@ -60,6 +60,11 @@ public class FotoEditableController implements Initializable {
         ImgviewFoto.setImage(i);
         personas = Ventana_AlbumController.foto.getPersonas();
         int tamanio = personas.size();
+        if(!personas.isEmpty()){
+            for(String s:personas){
+                personasCB.getItems().add(s);
+            }
+        }
         
     }    
 
@@ -120,6 +125,14 @@ public class FotoEditableController implements Initializable {
 
     @FXML
     private void GuardarCambios(MouseEvent event) {
+        DoubleCircularLinkedList<String> nuevas_personas = new DoubleCircularLinkedList<>();
+        if(!personasCB.getItems().isEmpty()){
+            for(String s: personasCB.getItems()){
+                nuevas_personas.addFirst(s);
+            }
+        }
+
+        
     }
     
 }
