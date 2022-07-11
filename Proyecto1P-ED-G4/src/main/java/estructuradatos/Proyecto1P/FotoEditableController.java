@@ -131,7 +131,9 @@ public class FotoEditableController implements Initializable {
                 nuevas_personas.addFirst(s);
             }
         }
-
+        for(String s:nuevas_personas){
+            System.out.println(s);
+        }
         
     }
     
