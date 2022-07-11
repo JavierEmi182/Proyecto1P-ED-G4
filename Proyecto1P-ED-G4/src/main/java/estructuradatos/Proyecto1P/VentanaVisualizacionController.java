@@ -16,11 +16,16 @@ import TDAs.NodeList;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -55,7 +60,7 @@ public class VentanaVisualizacionController implements Initializable {
     @FXML
     private Button btnVolver;
     @FXML
-    private Button btnCargarFoto;
+    private Button btneditar;
     /**
      * Initializes the controller class.
      */
@@ -73,6 +78,25 @@ public class VentanaVisualizacionController implements Initializable {
         int numeroFoto=albumDelNodo.getFotos().getIndex(nodoClickeado.getContent())+1;  //LE SUMO UNO PORQUE ES INDICE
         int totalFotos=albumDelNodo.getFotos().size();
         lbNumFoto.setText(String.valueOf(numeroFoto)+"/"+String.valueOf(totalFotos));*/
+       
+            EventHandler eventHandler = (event) -> {
+            Node node = (Node) event.getSource();
+            Stage stage = (Stage) node.getScene().getWindow();
+            stage.close();
+            FXMLLoader f = new FXMLLoader(App.class.getResource("/fxml/FotoEditable.fxml"));
+            Parent root;
+            try {
+                root = f.load();
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
+                root.autosize();
+            } catch (IOException ex) {
+                Logger.getLogger(Ventana_AlbumController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        };
+
+        btneditar.setOnMouseClicked(eventHandler);
         
     }    
 
@@ -165,8 +189,8 @@ public class VentanaVisualizacionController implements Initializable {
     }
 
     @FXML
-    private void cargarFoto(ActionEvent event) {
-        
+    private void CambiarVentanaEditar(ActionEvent event) {
+ 
     }
     
 }
