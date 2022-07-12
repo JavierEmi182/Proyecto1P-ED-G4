@@ -67,6 +67,22 @@ public class VentanaVisualizacionController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         Image i = new Image("file:recursos/fotos/"+Ventana_AlbumController.foto.getRuta());
+        albumDelNodo=Ventana_AlbumController.album;
+        System.out.println(albumDelNodo);
+        if(albumDelNodo.getFotos().size()==1){
+            ivFotoCentral.setImage(i);
+            btnSiguiente.setVisible(false);
+            btnAnterior.setVisible(false);
+        }
+        
+        for(NodeList<Photo> n1=albumDelNodo.getFotos().getFirst();n1.getNext()!=albumDelNodo.getFotos().getFirst();n1.getNext()){
+            System.out.println("Entre al for");
+            if(n1.getContent().getRuta().equals(Ventana_AlbumController.foto.getRuta())){
+                System.out.println("Hice un match con "+n1.getContent().getRuta());
+                nodoClickeado=n1;
+                break;
+            }
+        }
         ivFotoCentral.setImage(i);
         // TODO
         //NECESITO VER COMO CONSEGUIR EL NODO Y EL ALBUM (TAL VEZ UN STRING CON: NOMBREALBUM;FOTO
@@ -181,11 +197,18 @@ public class VentanaVisualizacionController implements Initializable {
 
     @FXML
     private void volverVentana(ActionEvent event) throws IOException {
-        /*FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/Ventana_Album.fxml"));
-        Parent root = fxmlLoader.load();
+        Node node= (Node)event.getSource();
+        Stage stage = (Stage) node.getScene().getWindow();
+        stage.close();
+        FXMLLoader f = new FXMLLoader(App.class.getResource("/fxml/Ventana_Album.fxml"));
+        Parent root;
+        root = f.load();
+        Scene scene = new Scene(root);
         stage.setScene(scene);
-        stage.show();*/
-        App.setRoot("/fxml/Ventana_Album.fxml");
+        stage.show();
+        root.autosize();
+            
+        
     }
 
     @FXML
