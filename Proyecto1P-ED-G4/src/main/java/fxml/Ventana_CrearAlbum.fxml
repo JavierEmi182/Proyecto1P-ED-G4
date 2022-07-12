@@ -52,9 +52,18 @@
                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <Label text="Nombre" />
-                                    <Label text="Descripción" GridPane.rowIndex="1" />
-                                    <Label text="Añadir foto" GridPane.rowIndex="2" />
+                                    <Label text="Nombre:">
+                                       <font>
+                                          <Font name="Bodoni MT" size="14.0" />
+                                       </font></Label>
+                                    <Label text="Descripción:" GridPane.rowIndex="1">
+                                       <font>
+                                          <Font name="Bodoni MT" size="14.0" />
+                                       </font></Label>
+                                    <Label text="Añadir foto:" GridPane.rowIndex="2">
+                                       <font>
+                                          <Font name="Bodoni MT" size="14.0" />
+                                       </font></Label>
                                     <Button mnemonicParsing="false" onMouseClicked="#anadirFoto" prefHeight="37.0" prefWidth="203.0" text="Añadir" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                        <GridPane.margin>
                                           <Insets left="15.0" />
@@ -63,11 +72,17 @@
                                        <GridPane.margin>
                                           <Insets left="15.0" right="15.0" />
                                        </GridPane.margin>
+                                       <font>
+                                          <Font name="Bodoni MT" size="14.0" />
+                                       </font>
                                     </TextField>
                                     <TextField fx:id="descripcion_AlbumCrear" prefHeight="46.0" prefWidth="206.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                        <GridPane.margin>
                                           <Insets left="15.0" right="15.0" />
                                        </GridPane.margin>
+                                       <font>
+                                          <Font name="Bodoni MT" size="14.0" />
+                                       </font>
                                     </TextField>
                                  </children>
                               </GridPane>

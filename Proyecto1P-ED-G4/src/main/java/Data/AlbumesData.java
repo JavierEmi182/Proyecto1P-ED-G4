@@ -84,12 +84,16 @@ public class AlbumesData {
         String ruta = "recursos/textos/AlbumesUsuario.txt";
         File file = new File(new URL("file:" + ruta).getFile());
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(file, true))) {
-            bw.newLine();
+            //bw.newLine();
             String fotos = "";
+            int size = album.getFotos().size();
+            if(size == 1){
+                fotos += album.getFotos().getFirst().getContent().getRuta();
+            }
             for (Photo f : album.getFotos()) {
                 fotos += f.getRuta() + "-";
             }
-            int i = 0;
+            //int i = 0;
             
             String linea = album.getNombre() + ";" + album.getDescripcion() + ";" + fotos + ";" + album.getFechaCreacion();
             bw.write(linea);

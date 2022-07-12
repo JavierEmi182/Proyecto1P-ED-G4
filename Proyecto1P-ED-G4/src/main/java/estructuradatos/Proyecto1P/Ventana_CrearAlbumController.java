@@ -46,16 +46,14 @@ public class Ventana_CrearAlbumController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }
 
     @FXML
     private void anadirFoto(MouseEvent event) throws IOException {
-        Node node = (Node) event.getSource();
-        Stage stage = (Stage) node.getScene().getWindow();
-        stage.close();
-        FXMLLoader f = new FXMLLoader(App.class.getResource("/fxml/Ventana_Visualizacion.fxml"));
+        FXMLLoader f = new FXMLLoader(App.class.getResource("/fxml/FileChooser.fxml"));
         Parent root = f.load();
         Scene scene = new Scene(root);
+        Stage stage = new Stage();
         stage.setScene(scene);
         stage.show();
         root.autosize();
@@ -65,27 +63,24 @@ public class Ventana_CrearAlbumController implements Initializable {
     private void crearAlbum(ActionEvent event) {
         String nombre_Album = nombre_AlbumCrear.getText();
         String descripcion_Album = descripcion_AlbumCrear.getText();
-        
-       // DoubleCircularLinkedList<Photo> fotos = leerFotos("recursos/textos/fotosUsuario.txt");
-        //System.out.println(""+nombre_Album);
-        
-        
-        /*if(!nombre_Album.equals("") && !descripcion_Album.equals("")){
-            //System.out.println(""+nombre_Album);
-            Album nuevo = new Album(nombre_Album,descripcion_Album);
-            System.out.println(""+nuevo);
+        if (!nombre_Album.equals("") && !descripcion_Album.equals("")) {
+            //Comparador de album por nombre
+            Album nuevo = new Album(nombre_Album, descripcion_Album);
+            nuevo.setFotos(FileChooserController.fotoSeleccionadaFileChooser);
+
+            System.out.println("" + nuevo);
             try {
-                System.out.println(""+nuevo);
+                System.out.println("" + nuevo);
                 escribirAlbumes(nuevo);
                 //System.out.println(""+nombre_Album);
             } catch (MalformedURLException ex) {
-              
-           }    
+                System.out.println(ex);
+
+            }
         }else{
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Por favor, ingrese un nombre y descricpcion");
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Por favor, ingrese un nombre y una descricpcion");
             alert.show();
-        }*/
-        
+        }
     }
 
     @FXML
@@ -100,6 +95,5 @@ public class Ventana_CrearAlbumController implements Initializable {
         stage.show();
         root.autosize();
     }
-    
-    
+
 }

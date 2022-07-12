@@ -159,11 +159,10 @@ public class Ventana_AlbumController implements Initializable {
                 };
 
                 vboxFoto.setOnMouseClicked(eventHandler);
-
             }
 
         } catch (IOException ex) {
-            Logger.getLogger(Ventana_AlbumController.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex);
         }
 
         /*CheckBox cb0 = new CheckBox("Personas");  
@@ -237,12 +236,10 @@ public class Ventana_AlbumController implements Initializable {
 
     @FXML
     private void importarFoto(ActionEvent event) throws IOException {
-        Node node = (Node) event.getSource();
-        Stage stage = (Stage) node.getScene().getWindow();
-        stage.close();
         FXMLLoader f = new FXMLLoader(App.class.getResource("/fxml/FileChooser.fxml"));
         Parent root = f.load();
         Scene scene = new Scene(root);
+        Stage stage = new Stage();
         stage.setScene(scene);
         stage.show();
         root.autosize();
@@ -348,7 +345,7 @@ public class Ventana_AlbumController implements Initializable {
                 stage.show();
                 root.autosize();
             } catch (IOException ex) {
-                Logger.getLogger(Ventana_AlbumController.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println(ex);
             }
         };
 
