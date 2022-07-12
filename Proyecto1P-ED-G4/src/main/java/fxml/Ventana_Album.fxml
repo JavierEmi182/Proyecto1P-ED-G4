@@ -19,7 +19,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="494.0" prefWidth="662.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="estructuradatos.Proyecto1P.Ventana_AlbumController">
+<AnchorPane id="AnchorPane" prefHeight="494.0" prefWidth="662.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="estructuradatos.Proyecto1P.Ventana_AlbumController">
    <children>
       <TabPane prefHeight="494.0" prefWidth="662.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
@@ -74,6 +74,11 @@
                                                             </Label>
                                                          </children>
                                                       </GridPane>
+                                                   </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
+                                                   <children>
+                                                      <Button fx:id="btnFiltrar" mnemonicParsing="false" onAction="#filtrar" text="Filtrar" />
                                                    </children>
                                                 </HBox>
                                              </children>

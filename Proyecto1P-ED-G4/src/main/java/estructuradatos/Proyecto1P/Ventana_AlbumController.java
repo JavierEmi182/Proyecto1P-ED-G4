@@ -90,6 +90,8 @@ public class Ventana_AlbumController implements Initializable {
     public static Photo foto;
     public static Album album;
     public static int index;
+    @FXML
+    private Button btnFiltrar;
 
     /**
      * Initializes the controller class.
@@ -370,5 +372,9 @@ public class Ventana_AlbumController implements Initializable {
         };
 
         vboxFoto.setOnMouseClicked(eventHandler);
+    }
+
+    @FXML
+    private void filtrar(ActionEvent event) {
     }
 }
