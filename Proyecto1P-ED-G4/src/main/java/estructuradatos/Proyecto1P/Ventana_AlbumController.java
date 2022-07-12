@@ -139,7 +139,9 @@ public class Ventana_AlbumController implements Initializable {
                 vboxFoto.getChildren().add(lprecio);
                 // vboxmenu.setPadding(new Insets(2, 3, 3, 4));
                 System.out.println("***");
+                
                 panelEdicion.getChildren().add(vboxFoto);
+                //scrollpaneEdi.setContent(vboxFoto);
                 EventHandler eventHandler = (event) -> {
                     Node node = (Node) event.getSource();
                     Stage stage = (Stage) node.getScene().getWindow();
@@ -160,6 +162,11 @@ public class Ventana_AlbumController implements Initializable {
 
                 vboxFoto.setOnMouseClicked(eventHandler);
             }
+            
+            //AGREGUE
+            scrollpaneEdi.setFitToWidth(true);
+            scrollpaneEdi.setFitToHeight(true);
+            scrollpaneEdi.setContent(panelEdicion);
 
         } catch (IOException ex) {
             System.out.println(ex);
@@ -327,8 +334,21 @@ public class Ventana_AlbumController implements Initializable {
 
         if (biblioteca.isSelected()) {
             panel.getChildren().add(vboxFoto);
+            /* 
+            scrollpaneEdi.setFitToWidth(true);
+            scrollpaneEdi.setFitToHeight(true);
+            scrollpaneEdi.setContent(panelEdicion);
+            */
+            scrollpaneBiblio.setFitToWidth(true);
+            scrollpaneBiblio.setFitToHeight(true);
+            scrollpaneBiblio.setContent(panel);
+            
         } else if (edicion.isSelected()) {
             panelEdicion.getChildren().add(vboxFoto);
+            scrollpaneEdi.setFitToWidth(true);
+            scrollpaneEdi.setFitToHeight(true);
+            scrollpaneEdi.setContent(panelEdicion);
+            //scrollpaneEdi.setContent(vboxFoto);
         }
 
         EventHandler eventHandler = (event) -> {
