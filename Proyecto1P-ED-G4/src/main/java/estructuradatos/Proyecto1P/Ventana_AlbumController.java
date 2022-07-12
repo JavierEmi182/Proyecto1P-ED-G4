@@ -74,9 +74,6 @@ public class Ventana_AlbumController implements Initializable {
     private Label nombreAlbum1;
     @FXML
     private Label descricpcionAlbum1;
-
-    public static Photo foto;
-    public static Album album;
     @FXML
     private ScrollPane scrollpaneBiblio;
     @FXML
@@ -89,6 +86,10 @@ public class Ventana_AlbumController implements Initializable {
     private Tab biblioteca;
     @FXML
     private Tab edicion;
+    
+    public static Photo foto;
+    public static Album album;
+    public static int index;
 
     /**
      * Initializes the controller class.
@@ -97,19 +98,16 @@ public class Ventana_AlbumController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
 
         try {
-            //"file:recursos/fotos/"+f.getRuta();
             DoubleCircularLinkedList<Photo> fotos = leerFotos("recursos/textos/fotosUsuario.txt");
             DoubleCircularLinkedList<Album> albumes = leerAlbumes("recursos/textos/albumesUsuario.txt", fotos);
 
             int c = albumes.size();
 
             TreeItem rootItem = new TreeItem("Albumes " + " (" + c + ")");
-
             if (c == 1) {
                 TreeItem item = new TreeItem(albumes.getFirst().getContent().getNombre());
                 rootItem.getChildren().add(item);
             }
-
             for (Album a : albumes) {
                 TreeItem item = new TreeItem(a.getNombre());
                 rootItem.getChildren().add(item);
@@ -123,7 +121,7 @@ public class Ventana_AlbumController implements Initializable {
             descricpcionAlbum.setText(albumes.getLast().getContent().getDescripcion());
             descricpcionAlbum1.setText(albumes.getLast().getContent().getDescripcion());
             mostrarImagenesXAlbum(albumes.getLast().getContent().getNombre());
-            
+
             for (Photo p : albumes.getLast().getContent().getFotos()) {
                 VBox vboxFoto = new VBox();
                 vboxFoto.setAlignment(Pos.CENTER);
@@ -142,6 +140,25 @@ public class Ventana_AlbumController implements Initializable {
                 // vboxmenu.setPadding(new Insets(2, 3, 3, 4));
                 System.out.println("***");
                 panelEdicion.getChildren().add(vboxFoto);
+                EventHandler eventHandler = (event) -> {
+                    Node node = (Node) event.getSource();
+                    Stage stage = (Stage) node.getScene().getWindow();
+                    stage.close();
+                    FXMLLoader f = new FXMLLoader(App.class.getResource("/fxml/VentanaVisualizacion.fxml"));
+                    Parent root;
+                    try {
+                        Ventana_AlbumController.foto = p;
+                        root = f.load();
+                        Scene scene = new Scene(root);
+                        stage.setScene(scene);
+                        stage.show();
+                        root.autosize();
+                    } catch (IOException ex) {
+                       
+                    }
+                };
+
+                vboxFoto.setOnMouseClicked(eventHandler);
 
             }
 
@@ -163,14 +180,14 @@ public class Ventana_AlbumController implements Initializable {
 
         TreeItem<String> item_Seleccionado = list_Album.getSelectionModel().getSelectedItem();
         TreeItem<String> item_Root = list_Album.getTreeItem(0);
-        try{
-        if (item_Seleccionado != item_Root) {
-            panel.getChildren().clear();
-            nombreAlbum.setText(item_Seleccionado.getValue());
-            mostrarDescricpion(item_Seleccionado.getValue());
-            mostrarImagenesXAlbum(item_Seleccionado.getValue());
-        }
-        }catch(NullPointerException ex){
+        try {
+            if (item_Seleccionado != item_Root) {
+                panel.getChildren().clear();
+                nombreAlbum.setText(item_Seleccionado.getValue());
+                mostrarDescricpion(item_Seleccionado.getValue());
+                mostrarImagenesXAlbum(item_Seleccionado.getValue());
+            }
+        } catch (NullPointerException ex) {
             System.out.println("Seleccione un album");
         }
 
@@ -180,20 +197,29 @@ public class Ventana_AlbumController implements Initializable {
     private void listaAlbumesEdicion(MouseEvent event) throws IOException {
         TreeItem<String> item_Seleccionado = list_Album1.getSelectionModel().getSelectedItem();
         TreeItem<String> item_Root = list_Album1.getTreeItem(0);
-        try{
-        if (item_Seleccionado != item_Root) {
-            panelEdicion.getChildren().clear();
-            nombreAlbum1.setText(item_Seleccionado.getValue());
-            mostrarDescricpion(item_Seleccionado.getValue());
-            mostrarImagenesXAlbum(item_Seleccionado.getValue());
-        }
-        }catch(NullPointerException ex){
+        try {
+            if (item_Seleccionado != item_Root) {
+                panelEdicion.getChildren().clear();
+                nombreAlbum1.setText(item_Seleccionado.getValue());
+                mostrarDescricpion(item_Seleccionado.getValue());
+                mostrarImagenesXAlbum(item_Seleccionado.getValue());
+            }
+        } catch (NullPointerException ex) {
             System.out.println("Seleccione un album");
         }
     }
 
     @FXML
-    private void crearAlbum(MouseEvent event) {
+    private void crearAlbum(MouseEvent event) throws IOException {
+        Node node = (Node) event.getSource();
+        Stage stage = (Stage) node.getScene().getWindow();
+        stage.close();
+        FXMLLoader f = new FXMLLoader(App.class.getResource("/fxml/Ventana_CrearAlbum.fxml"));
+        Parent root = f.load();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+        root.autosize();
 
     }
 
@@ -215,30 +241,20 @@ public class Ventana_AlbumController implements Initializable {
         Stage stage = (Stage) node.getScene().getWindow();
         stage.close();
         FXMLLoader f = new FXMLLoader(App.class.getResource("/fxml/FileChooser.fxml"));
-        //sendData();
         Parent root = f.load();
-        //stage.setUserData(albumSeleccionado);
         Scene scene = new Scene(root);
-        //Stage stage = new Stage();
         stage.setScene(scene);
         stage.show();
         root.autosize();
     }
 
     private void mostrarDescricpion(String itemSeleccionado) throws IOException {
-        /*Comparator<Album> cmpAlbum = new Comparator<>() {
-            @Override
-            public int compare(Album a1, Album a2) {
-                return a1.getNombre().compareTo(a2.getNombre());
-            }
-        };*/
 
         DoubleCircularLinkedList<Photo> fotos = leerFotos("recursos/textos/fotosUsuario.txt");
         DoubleCircularLinkedList<Album> albumes = leerAlbumes("recursos/textos/albumesUsuario.txt", fotos);
         int c = albumes.size();
         if (c == 1) {
             if (itemSeleccionado.compareTo(albumes.getFirst().getContent().getNombre()) == 0) {
-                /*DoubleCircularLinkedList<Photo> fotosAlbum = */
                 albumes.getFirst().getContent().getFotos();
             }
         }
@@ -267,26 +283,20 @@ public class Ventana_AlbumController implements Initializable {
         s.setUnitIncrement(20);
         s.setBlockIncrement(20);
 
-        /*Comparator<Album> cmpAlbum = new Comparator<>() {
-            @Override
-            public int compare(Album a1, Album a2) {
-                return a1.getNombre().compareTo(a2.getNombre());
-
-            }
-        };*/
         int c = albumes.size();
+        int i=c-1;
 
         if (c == 1) {
             if (itemSeleccionado.equals(albumes.getFirst().getContent().getNombre())) {
-                /*DoubleCircularLinkedList<Photo> fotosAlbum = */
                 albumes.getFirst().getContent().getFotos();
             }
-
         }
 
         for (Album a : albumes) {
             if (itemSeleccionado.compareTo(a.getNombre()) == 0) {
-                Ventana_AlbumController.album=a;
+                Ventana_AlbumController.index = i;
+                System.out.println(i);
+                Ventana_AlbumController.album = a;
                 int contFotos = a.getFotos().size();
                 if (contFotos == 1) {
                     Photo p = a.getFotos().getFirst().getContent();
@@ -296,6 +306,7 @@ public class Ventana_AlbumController implements Initializable {
                     mostrarFotosPanel(p);
                 }
             }
+            i--;
         }
     }
 
@@ -328,16 +339,11 @@ public class Ventana_AlbumController implements Initializable {
             Stage stage = (Stage) node.getScene().getWindow();
             stage.close();
             FXMLLoader f = new FXMLLoader(App.class.getResource("/fxml/VentanaVisualizacion.fxml"));
-            //sendData();
-            //AQUI DEBO REALIZAR EL SEND DATA
             Parent root;
             try {
-                Ventana_AlbumController.foto=p;
+                Ventana_AlbumController.foto = p;
                 root = f.load();
-                //stage.setUserData(f);
-                //stage.setUserData(albumSeleccionado);
                 Scene scene = new Scene(root);
-                //Stage stage = new Stage();
                 stage.setScene(scene);
                 stage.show();
                 root.autosize();
@@ -348,13 +354,4 @@ public class Ventana_AlbumController implements Initializable {
 
         vboxFoto.setOnMouseClicked(eventHandler);
     }
-
-    public void setPhoto(Photo foto) {
-        this.foto = foto;
-    }
-
-    public Photo getPhoto() {
-        return this.foto;
-    }
-
 }

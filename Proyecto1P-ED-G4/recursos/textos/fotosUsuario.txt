@@ -5,3 +5,5 @@ mariposa.jpg;null;null;Es una mariposa;0
 endgame.jpg;Thanos-IronMan-;Wakanda;Pelea Endgame;1
 EncuentroTitan.jpg;IronMan-StarLord-;Titan;StarLord se encuentra con IronMan;0
 PeleaTitan.jpg;IronMan-SpiderMan-;Titan;IronMan con SpiderMan en Titan;0
+001_p.jpg;;;;0
+scale.jpg;;;;1

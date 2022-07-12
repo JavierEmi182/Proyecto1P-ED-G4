@@ -21,11 +21,28 @@ public class Album {
     LocalDate fechaCreacion;
     String descripcion;
 
-    public Album() {
-        this.nombre=null;
+    public Album(String nombre, String descripcion) {
+        this.nombre=nombre;
         this.fotos=null;
-        this.fechaCreacion=null;
-        this.descripcion=null;
+        this.fechaCreacion=LocalDate.now();
+        this.descripcion=descripcion;
+    }
+    
+    //constructor
+    public Album(String nombre, DoubleCircularLinkedList<Photo> fotos, String descripcion) {
+        this.nombre = nombre;
+        this.fotos = fotos;
+        this.fechaCreacion=LocalDate.now();
+        this.descripcion=descripcion;
+        
+    }
+    //constructor recibiendo un LocalDate
+    public Album(String nombre, DoubleCircularLinkedList<Photo> fotosAlbum, LocalDate fecha, String descripcion) {
+        this.nombre = nombre;
+        this.fotos = fotosAlbum;
+        this.fechaCreacion=fecha;
+        this.descripcion=descripcion;
+        
     }
   
     //getters and setters
@@ -61,37 +78,7 @@ public class Album {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-    
-    
-    
-    
-    //constructor
-
-    public Album(String nombre, DoubleCircularLinkedList<Photo> fotos, String descripcion) {
-        this.nombre = nombre;
-        this.fotos = fotos;
-        this.fechaCreacion=LocalDate.now();
-        this.descripcion=descripcion;
-        
-    }
-    //constructor recibiendo un LocalDate
-    public Album(String nombre, DoubleCircularLinkedList<Photo> fotosAlbum, LocalDate fecha, String descripcion) {
-        this.nombre = nombre;
-        this.fotos = fotosAlbum;
-        this.fechaCreacion=fecha;
-        this.descripcion=descripcion;
-        
-    }
-    
-    //constructor sin descripcion
-    public Album(String nombre, DoubleCircularLinkedList<Photo> fotosAlbum, LocalDate fecha) {
-        this.nombre = nombre;
-        this.fotos = fotosAlbum;
-        this.fechaCreacion=fecha;
-        this.descripcion=nombre;  //si no le ingresa descripcion,coge el nombre como descripcion
-        
-    }
-    
+       
     //metodos
     public void agregarImagen(Photo foto){
         fotos.addLast(foto);
@@ -234,6 +221,6 @@ public class Album {
     
     @Override
     public String toString() {
-        return this.getNombre()+"= "+fotos;
+        return this.getNombre()+";"+ this.getDescripcion()+"= "+fotos;
     }
 }

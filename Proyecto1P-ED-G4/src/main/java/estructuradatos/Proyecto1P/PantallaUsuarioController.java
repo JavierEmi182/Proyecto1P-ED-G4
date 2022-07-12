@@ -104,7 +104,8 @@ public class PantallaUsuarioController implements Initializable {
         //SECUENCIA PARA NUEVA VENTANA
         //cbAlbumes.get
         DoubleCircularLinkedList<Album> albumes = leerAlbumes("/archivos/albumesUsuario.txt",leerFotos("/archivos/fotosUsuario.txt"));
-        final Album albumSeleccionado = new Album();
+        
+        /*final Album albumSeleccionado = new Album();
         cbAlbumes.setOnAction((ActionEvent event1) -> {
             System.out.println("Se activo accion de comboBox");
             //final Album a1 = null;
@@ -139,7 +140,7 @@ public class PantallaUsuarioController implements Initializable {
         root.autosize();
         //stage.setScene(  ) -> scene = new Scene(Parent root) -> 
         //Parent root = fxmlLoader.load(); -> FXMLLoader f = new FXMLLoader(App.class.getResource("ruta")
-        //cbAlbumes.getTypeSelector()
+        //cbAlbumes.getTypeSelector()*/
     }
 /*
     @FXML
@@ -165,7 +166,8 @@ public class PantallaUsuarioController implements Initializable {
     private void abrirVentanaEditarAlbum(ActionEvent event) throws IOException {
         
         DoubleCircularLinkedList<Album> albumes = leerAlbumes("/archivos/albumesUsuario.txt",leerFotos("/archivos/fotosUsuario.txt"));
-        Album albumSeleccionado = new Album();
+        
+        /*Album albumSeleccionado = new Album();
         //cbAlbumes.setOnAction((ActionEvent event1) -> {
             System.out.println("Se activo accion de comboBox");
             //final Album a1 = null;
@@ -191,10 +193,10 @@ public class PantallaUsuarioController implements Initializable {
                 //DEBERIA LANZAR EL MODIFICAR ALBUM NO EDITABLE
             }else{*/
             
-        System.out.println("Album seleccionado: "+albumSeleccionado);
+       // System.out.println("Album seleccionado: "+albumSeleccionado);
         //Album album =albumes;
         //cbAlbumes.getValue();
-        Node node = (Node)event.getSource();
+       /* Node node = (Node)event.getSource();
         Stage stage = (Stage)node.getScene().getWindow();
         stage.close();
         FXMLLoader f = new FXMLLoader(App.class.getResource("/fxml/VentanaModificarAlbumEditable.fxml"));
@@ -207,7 +209,7 @@ public class PantallaUsuarioController implements Initializable {
         stage.setWidth(700);
         stage.setHeight(400);
         stage.show();
-        root.autosize();
+        root.autosize();*/
     //}
     }
     

@@ -43,8 +43,6 @@ public class FileChooserController implements Initializable {
     private Button btnBuscar;
     @FXML
     private ImageView ivImagen;
-    
-    
     @FXML
     private TextField tfLugar;
     @FXML
@@ -55,15 +53,14 @@ public class FileChooserController implements Initializable {
     private TextField tfPersona1;
     @FXML
     private Button btnAgregarImagen;
+    @FXML
+    private Label lbMensajeError;
     
     private Photo imagenSeleccionada;
     private String rutaAnterior;
     private File fileSeleccionado;
     private int i=0;
-    @FXML
-    private Button btnVolver;
-    @FXML
-    private Label lbMensajeError;
+    
 
     /**
      * Initializes the controller class.
@@ -136,27 +133,23 @@ public class FileChooserController implements Initializable {
         //SI EL CHECKBOX ESTA ENCENDIDA, AGREGO IMAGEN EN LA LINEA 1, QUE ES EL ALBUM DE FAVORITOS
         
         //SI LA IMAGEN NO ESTA EN EL ALBUM DE TODAS LAS IMAGENES
-        if(!imagenExiste(fotoSeleccionada)){
-            System.out.println("Agrege a album de todas");
-            ingresarNuevoImagen(fotoSeleccionada,0); //LA AÑADO A TODAS
-        }
-        
-        if(i==1){
-            System.out.println("Agrege album favoritos");
-                ingresarNuevoImagen(fotoSeleccionada,1);
-                //AQUI DEBERIA AÑADIRLA SOLO ALBUM DEL SCENE Y FAVORITAS
-                //int i=getLineadeNombreAlbum("/archivos/albumesUsuario.txt",album.getNombre());
-                //ingresarNuevoImagen(fotoSeleccionada,i);
-                //ingresarNuevoImagen(fotoSeleccionada,1); 
-            
-            
-            
-        }else{
-            
-                //AQUI DEBERIA AÑADIRLA SOLO ALBUM DEL SCENE Y FAVORITAS
-                //int i=getLineadeNombreAlbum("/archivos/albumesUsuario.txt",album.getNombre());
-                //ingresarNuevoImagen(fotoSeleccionada,i);
-            }  
+        if (!imagenExiste(fotoSeleccionada)) {
+                i = 0;
+                System.out.println("Agrege a album de todas");
+                ingresarNuevoImagen(fotoSeleccionada, 0); //LA AÑADO A TODAS
+                i = Ventana_AlbumController.index;
+                if (!imagenExiste(fotoSeleccionada)) {
+                    ingresarNuevoImagen(fotoSeleccionada, i);
+                    if (checkBoxFavoritos.isSelected()) {
+                        System.out.println("Agrege album favoritos");
+                        ingresarNuevoImagen(fotoSeleccionada, 1);
+                    }
+                }
+
+            }
+
+            ivImagen.setImage(null);
+
         
         }catch(NullPointerException ex){
             lbMensajeError.setText("Porfavor seleccione una imagen");
@@ -173,9 +166,9 @@ public class FileChooserController implements Initializable {
             i=0;
         }
     }
-
+    
     @FXML
-    private void volverVentanaAlbum(ActionEvent event) throws IOException {
+    private void volver(ActionEvent event) throws IOException {
         lbMensajeError.setText("");
         //App.setRoot("/fxml/Ventana_Album.fxml");
         Node node = (Node) event.getSource();
