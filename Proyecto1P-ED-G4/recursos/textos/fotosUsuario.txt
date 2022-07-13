@@ -7,4 +7,3 @@ EncuentroTitan.jpg;IronMan-StarLord-;Titan;StarLord se encuentra con IronMan;0
 PeleaTitan.jpg;JavierPrueba-IronMan-SpiderMan-;Titan;IronMan con SpiderMan en Titan;0
 bigotes3.jpg;;;;0
 michis.jpg;;;;0
-gatoLindo.png;;;;0

@@ -74,21 +74,23 @@ public class VentanaVisualizacionController implements Initializable {
         System.out.println(albumDelNodo);
         System.out.println(Ventana_AlbumController.foto.getRuta());
         if(albumDelNodo.getFotos().size()==1){
+            nodoClickeado=albumDelNodo.getFotos().getFirst();
             lbNumFoto.setText("1/1");
             ivFotoCentral.setImage(i);
             btnSiguiente.setVisible(false);
             btnAnterior.setVisible(false);
             lbNombreFoto.setText(nodoClickeado.getContent().getRuta().substring(0,nodoClickeado.getContent().getRuta().length()-4));
             lbFechaFoto.setText(nodoClickeado.getContent().getFecha().toString());
-        }
+        }else{
         
-        for(NodeList<Photo> n1=albumDelNodo.getFotos().getFirst();n1.getNext()!=albumDelNodo.getFotos().getFirst();n1=n1.getNext()){
-            System.out.println("Entre al for");
-            System.out.println("for:" +n1.getContent().getRuta());
-            if(n1.getContent().getRuta().equals(Ventana_AlbumController.foto.getRuta())){
-                System.out.println("Hice un match con "+n1.getContent().getRuta());
-                nodoClickeado=n1;
-                break;
+            for(NodeList<Photo> n1=albumDelNodo.getFotos().getFirst();n1.getNext()!=albumDelNodo.getFotos().getFirst();n1=n1.getNext()){
+                System.out.println("Entre al for");
+                System.out.println("for:" +n1.getContent().getRuta());
+                if(n1.getContent().getRuta().equals(Ventana_AlbumController.foto.getRuta())){
+                    System.out.println("Hice un match con "+n1.getContent().getRuta());
+                    nodoClickeado=n1;
+                    break;
+                }
             }
         }
         if(nodoClickeado==null){

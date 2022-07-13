@@ -133,7 +133,13 @@ public class FotoEditableController implements Initializable {
 
     @FXML
     private void EliminarFoto(MouseEvent event) {
-        cargarVentanaAnterior(event);
+        
+        try {
+            DeletePhoto();
+            cargarVentanaAnterior(event);
+        } catch (IOException ex) {
+            Logger.getLogger(FotoEditableController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }
 
@@ -220,12 +226,11 @@ public class FotoEditableController implements Initializable {
 
         try(BufferedReader bf= new BufferedReader(new FileReader(ruta))){
             String linea;
-            //leer la linea hasta llegar al final
             while((linea=bf.readLine()) !=null){
                 String linea2="";
                 String[] partes = linea.split(";");
                 if(partes[0].equals(nombrefoto)){
-                    partes[1]="hola";
+                    continue;
                 }
                 for(int i=0;i<partes.length;i++){
 
