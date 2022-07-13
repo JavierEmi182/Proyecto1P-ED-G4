@@ -1,6 +1,8 @@
 package TDAs;
 
-public class ArrayList<E> implements List<E>{
+import java.util.Iterator;
+
+public class ArrayList<E> implements List<E>,Iterable<E>{
     
     private int capacity = 100;
     private E[] elements = null;
@@ -91,6 +93,26 @@ public class ArrayList<E> implements List<E>{
         }
         elements = nuevo;
         capacity *= 2;
+    }
+    
+    @Override
+    public Iterator<E> iterator() {
+        
+        Iterator<E> it = new Iterator<E>() {
+            int cursor = 0;
+            @Override
+            public boolean hasNext() {
+                return cursor < effectiveSize;
+            }
+
+            @Override
+            public E next() {
+                E e = elements[cursor];
+                cursor++;
+                return e;
+            }
+        };
+        return it;
     }
     
 }

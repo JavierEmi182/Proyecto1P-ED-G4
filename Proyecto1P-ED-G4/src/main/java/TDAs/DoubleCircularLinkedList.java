@@ -18,8 +18,10 @@ public class DoubleCircularLinkedList<E> implements Iterable<E>, List<E>  {
     }
     //contructor de prueba
     public DoubleCircularLinkedList(E e) {
-        this.first.setContent(e);
-        this.last.setContent(e);
+        //this.first.setContent(e);
+        this.first=new NodeList<E>(e);
+        //this.last.setContent(e);
+        this.last=new NodeList<E>(e);
     }
 
     public NodeList<E> getFirst() {

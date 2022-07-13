@@ -108,9 +108,10 @@ public class Album {
     public DoubleCircularLinkedList<Photo> filtrarPorLugar(String lugar){
         Map<String,DoubleCircularLinkedList<Photo>> fotosPorLugar=new LinkedHashMap<>();
         for(Photo f:this.getFotos()){
+            if(f.getLugar()!=null){
             fotosPorLugar.putIfAbsent(f.getLugar(), new DoubleCircularLinkedList<Photo>(f));
             fotosPorLugar.get(f.getLugar()).addFirst(f);
-        }
+        }}
         
         return fotosPorLugar.get(lugar);
     }

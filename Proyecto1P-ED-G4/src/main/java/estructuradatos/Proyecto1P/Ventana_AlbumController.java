@@ -410,6 +410,17 @@ public class Ventana_AlbumController implements Initializable {
     }
 
     @FXML
-    private void filtrar(ActionEvent event) {
+    private void filtrar(ActionEvent event) throws IOException {
+        Node node = (Node) event.getSource();
+            Stage stage = (Stage) node.getScene().getWindow();
+            stage.close();
+            FXMLLoader f = new FXMLLoader(App.class.getResource("/fxml/VentanaFiltrar.fxml"));
+            Parent root;
+            root = f.load();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+            root.autosize();
+
     }
 }
