@@ -7,6 +7,7 @@ package estructuradatos.Proyecto1P;
 
 import Classes.Album;
 import Classes.Photo;
+import static Data.AlbumesData.eliminarAlbumArchivo;
 import static Data.AlbumesData.leerAlbumes;
 import static Data.fotosData.leerFotos;
 import TDAs.DoubleCircularLinkedList;
@@ -29,6 +30,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.CustomMenuItem;
@@ -255,7 +257,10 @@ public class Ventana_AlbumController implements Initializable {
     }
 
     @FXML
-    private void eliminarAlbum(MouseEvent event) {
+    private void eliminarAlbum(MouseEvent event) throws IOException {
+        eliminarAlbumArchivo(album);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Se eliminó "+album.getNombre());
+        alert.show();
     }
 
     @FXML

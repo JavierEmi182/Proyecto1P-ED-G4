@@ -7,6 +7,7 @@ package Data;
 
 import Classes.Album;
 import Classes.Photo;
+import TDAs.ArrayList;
 import TDAs.DoubleCircularLinkedList;
 import estructuradatos.Proyecto1P.App;
 import java.io.BufferedReader;
@@ -237,6 +238,61 @@ public class AlbumesData {
             }
         }
         return false;
+    }
+    
+    public static String lineaAlbum(String ruta, String elementoBuscado) throws IOException {
+        //int l = 0;
+        String lineaObtenida = "";
+        //INTENTO TARGET
+        //String completo=leerArchivoCompleto("/archivos/albumesUsuario.txt");
+        //INTENTO PERMANENTE
+        String completo = leerArchivoCompleto("recursos/textos/albumesUsuario.txt");
+        String lineas[] = completo.split("\r?\n|\r");
+
+        //String split[] = leerArchivoCompleto(ruta).split("\n");
+        for (String s : lineas) {
+            String lineaSeparada[] = s.split(";");
+            if (lineaSeparada[0].equals(elementoBuscado)) {
+                lineaObtenida += s;
+            }
+        }
+        return lineaObtenida;
+    }
+    
+    
+    public static void eliminarAlbumArchivo(Album albumSeleccionado) throws MalformedURLException, IOException{
+        
+
+        ArrayList<String> nuevaslineastxt =new ArrayList<>();
+
+        String ruta = new URL("file:recursos/textos/albumesUsuario.txt").getFile();
+        String lineaEliminar = lineaAlbum(ruta, albumSeleccionado.getNombre());
+
+        try(BufferedReader bf= new BufferedReader(new FileReader(ruta))){
+            String linea;
+            //leer la linea hasta llegar al final
+            while((linea=bf.readLine()) !=null){
+                if(!linea.equals(lineaEliminar)){
+                     nuevaslineastxt.addFirst(linea);
+                }
+   
+            }
+            bf.close();
+        }catch(FileNotFoundException ex){
+                    System.out.println(ex.getMessage());
+        }catch(IOException ex){
+            System.out.println(ex.getMessage());
+        }
+        
+        
+        try(BufferedWriter bf2= new BufferedWriter(new FileWriter(ruta))){
+            for(String s: nuevaslineastxt){
+                bf2.write(s);
+                bf2.newLine();
+            }
+            bf2.close();
+        }
+
     }
 
 }
