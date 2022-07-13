@@ -89,6 +89,7 @@ public class Ventana_AlbumController implements Initializable {
     
     public static Photo foto;
     public static Album album;
+    public static Album albumfiltrado;
     public static int index;
     @FXML
     private Button btnFiltrar;
@@ -200,6 +201,20 @@ public class Ventana_AlbumController implements Initializable {
         }
 
     }
+    
+    
+    /*
+    METODO BOTON FILTRAR 
+    boton event{
+        Ventana_a...albumfiltrado=Ventana....albumfiltrado.filtrarPorLugar(tfLugar.getContent());
+        String[] personas=tfPersonas.split(",");
+        for(String s:personas){
+        Ventana.....albumfiltrado=Venta.....albumfiltrado.filtrarPorPersona(s);
+        }
+        cargarFotos(ventana....albumFiltrado); 
+    }
+    
+    */
 
     @FXML
     private void listaAlbumesEdicion(MouseEvent event) throws IOException {
@@ -281,13 +296,13 @@ public class Ventana_AlbumController implements Initializable {
         DoubleCircularLinkedList<Photo> fotos = leerFotos("recursos/textos/fotosUsuario.txt");
         DoubleCircularLinkedList<Album> albumes = leerAlbumes("recursos/textos/albumesUsuario.txt", fotos);
 
-        ScrollBar s = new ScrollBar();
+        /*ScrollBar s = new ScrollBar();
         s.setMin(0);
         s.setMax(400);
         s.setValue(400);
         s.setOrientation(Orientation.VERTICAL);
         s.setUnitIncrement(20);
-        s.setBlockIncrement(20);
+        s.setBlockIncrement(20);*/
 
         int c = albumes.size();
         int i=c-1;
@@ -303,6 +318,8 @@ public class Ventana_AlbumController implements Initializable {
                 Ventana_AlbumController.index = i;
                 System.out.println(i);
                 Ventana_AlbumController.album = a;
+                //INICIALIZO ALBUMFILTRADO
+                albumfiltrado=a;
                 int contFotos = a.getFotos().size();
                 if (contFotos == 1) {
                     Photo p = a.getFotos().getFirst().getContent();
@@ -317,9 +334,13 @@ public class Ventana_AlbumController implements Initializable {
     }
     
     private void cargarFotos(Album albumseleccionado){
+        panel.getChildren().clear();
         for(Photo p:albumseleccionado.getFotos()){
             mostrarFotosPanel(p);
         }
+        scrollpaneEdi.setFitToWidth(true);
+        scrollpaneEdi.setFitToHeight(true);
+        scrollpaneEdi.setContent(panel);
     }
     
     /*

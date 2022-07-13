@@ -96,6 +96,15 @@ public class Album {
     }
     
     //METODOS CON MAPAS
+    /*
+    JUAN,JOSE,PEPE
+    listafiltrado=listafiltrado.filtradoPorLugar(Juan);
+    listafiltrado=listafiltrado.filtradoPorLugar(Jose);
+    listafiltrado=listafiltrado.filtradoPorLugar(Pepe);
+    carfarFotos(listafiltrado);
+    */
+    
+    
     public DoubleCircularLinkedList<Photo> filtrarPorLugar(String lugar){
         Map<String,DoubleCircularLinkedList<Photo>> fotosPorLugar=new LinkedHashMap<>();
         for(Photo f:this.getFotos()){
