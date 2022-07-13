@@ -340,12 +340,19 @@ public class Ventana_AlbumController implements Initializable {
     
     private void cargarFotos(Album albumseleccionado){
         panel.getChildren().clear();
-        for(Photo p:albumseleccionado.getFotos()){
-            mostrarFotosPanel(p);
+        if(albumseleccionado.getFotos().size()==1){
+            mostrarFotosPanel(albumseleccionado.getFotos().getFirst().getContent());
+        }else if(albumseleccionado.getFotos().size()==2){
+            mostrarFotosPanel(albumseleccionado.getFotos().getFirst().getContent());
+            mostrarFotosPanel(albumseleccionado.getFotos().getLast().getContent());
+        }else{
+            for(Photo p:albumseleccionado.getFotos()){
+                mostrarFotosPanel(p);
+            }
         }
-        scrollpaneEdi.setFitToWidth(true);
+        /*scrollpaneEdi.setFitToWidth(true);
         scrollpaneEdi.setFitToHeight(true);
-        scrollpaneEdi.setContent(panel);
+        scrollpaneEdi.setContent(panel);*/
     }
     
     /*
@@ -431,12 +438,25 @@ public class Ventana_AlbumController implements Initializable {
 
     @FXML
     private void aplicarFiltro(ActionEvent event) {
+        albumfiltrado.setFotos(VentanaFiltrarController.fotosFiltradas);
+        System.out.println(albumfiltrado);
         cargarFotos(albumfiltrado);
     }
 
     @FXML
-    private void limpiarFiltro(ActionEvent event) {
+    private void limpiarFiltro(ActionEvent event) throws IOException {
         albumfiltrado=album;
-        cargarFotos(albumfiltrado);
+        //cargarFotos(albumfiltrado);
+        //mostrarImagenesXAlbum(itemSeleccionado);
+        Node node = (Node) event.getSource();
+            Stage stage = (Stage) node.getScene().getWindow();
+            stage.close();
+            FXMLLoader f = new FXMLLoader(App.class.getResource("/fxml/Ventana_Album.fxml"));
+            Parent root;
+            root = f.load();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+            root.autosize();
     }
 }

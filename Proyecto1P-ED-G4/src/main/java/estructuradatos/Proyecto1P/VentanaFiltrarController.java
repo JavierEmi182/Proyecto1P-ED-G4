@@ -5,6 +5,8 @@
  */
 package estructuradatos.Proyecto1P;
 
+import Classes.Photo;
+import TDAs.DoubleCircularLinkedList;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -34,6 +36,8 @@ public class VentanaFiltrarController implements Initializable {
     private TextField tfPersonas;
     @FXML
     private Button btnFiltrar;
+    
+    public static DoubleCircularLinkedList<Photo> fotosFiltradas;
 
     /**
      * Initializes the controller class.
@@ -41,6 +45,7 @@ public class VentanaFiltrarController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        fotosFiltradas=Ventana_AlbumController.albumfiltrado.getFotos();
     }    
 
     @FXML
@@ -53,18 +58,24 @@ public class VentanaFiltrarController implements Initializable {
         }
         cargarFotos(ventana....albumFiltrado); 
         */
-        if(tfLugar.getText()!=null){
-            System.out.println(Ventana_AlbumController.albumfiltrado.filtrarPorLugar(tfLugar.getText()));
-        Ventana_AlbumController.albumfiltrado.setFotos(Ventana_AlbumController.albumfiltrado.filtrarPorLugar(tfLugar.getText()));
+        //if(tfLugar.getText()!=null){
+        if(!tfLugar.getText().trim().isEmpty()){
+            //System.out.println(Ventana_AlbumController.albumfiltrado.filtrarPorLugar(tfLugar.getText()));
+        //Ventana_AlbumController.albumfiltrado.setFotos(Ventana_AlbumController.albumfiltrado.filtrarPorLugar(tfLugar.getText()));
+            fotosFiltradas=Ventana_AlbumController.albumfiltrado.filtrarPorLugar(tfLugar.getText());
         }
-        if(tfPersonas.getText()!=null){
+        //if(tfPersonas.getText()!=null){
+        if(!tfPersonas.getText().trim().isEmpty()){
+            //System.out.println(tfPersonas.getText().trim().isEmpty());
             String[] personas=tfPersonas.getText().split(",");
             for(String p:personas){
-                Ventana_AlbumController.albumfiltrado.setFotos(Ventana_AlbumController.albumfiltrado.filtrarPorPersona(p));
+                //Ventana_AlbumController.albumfiltrado.setFotos(Ventana_AlbumController.albumfiltrado.filtrarPorPersona(p));
+                fotosFiltradas=Ventana_AlbumController.albumfiltrado.filtrarPorPersona(p);
             }
             //cargarFotos
         }
-        System.out.println(Ventana_AlbumController.albumfiltrado);
+        //System.out.println(Ventana_AlbumController.albumfiltrado);
+        System.out.println(fotosFiltradas);
     }
 
     @FXML
