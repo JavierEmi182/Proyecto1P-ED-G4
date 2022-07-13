@@ -315,6 +315,20 @@ public class Ventana_AlbumController implements Initializable {
             i--;
         }
     }
+    
+    private void cargarFotos(Album albumseleccionado){
+        for(Photo p:albumseleccionado.getFotos()){
+            mostrarFotosPanel(p);
+        }
+    }
+    
+    /*
+    filtraste GYE
+    Album albumSeleccionadofiltrado
+    albumSeleccionadoFiltrado=albumSeleccionado.filtradoLugar(GYE)
+    panel.getChildren().clear();
+    cargarFotos(albumSelecionadoFiltrado);
+    */
 
     private void mostrarFotosPanel(Photo p) {
         VBox vboxFoto = new VBox();

@@ -68,25 +68,34 @@ public class VentanaVisualizacionController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         Image i = new Image("file:recursos/fotos/"+Ventana_AlbumController.foto.getRuta());
         albumDelNodo=Ventana_AlbumController.album;
-        //System.out.println(albumDelNodo);
+        System.out.println(albumDelNodo);
+        System.out.println(Ventana_AlbumController.foto.getRuta());
         if(albumDelNodo.getFotos().size()==1){
             lbNumFoto.setText("1/1");
             ivFotoCentral.setImage(i);
             btnSiguiente.setVisible(false);
             btnAnterior.setVisible(false);
+            lbNombreFoto.setText(nodoClickeado.getContent().getRuta().substring(0,nodoClickeado.getContent().getRuta().length()-4));
+            lbFechaFoto.setText(nodoClickeado.getContent().getFecha().toString());
         }
         
-        for(NodeList<Photo> n1=albumDelNodo.getFotos().getFirst();n1.getNext()!=albumDelNodo.getFotos().getFirst();n1.getNext()){
-            //System.out.println("Entre al for");
+        for(NodeList<Photo> n1=albumDelNodo.getFotos().getFirst();n1.getNext()!=albumDelNodo.getFotos().getFirst();n1=n1.getNext()){
+            System.out.println("Entre al for");
+            System.out.println("for:" +n1.getContent().getRuta());
             if(n1.getContent().getRuta().equals(Ventana_AlbumController.foto.getRuta())){
                 System.out.println("Hice un match con "+n1.getContent().getRuta());
                 nodoClickeado=n1;
                 break;
             }
         }
+        if(nodoClickeado==null){
+            nodoClickeado=albumDelNodo.getFotos().getLast();
+        }
         int numeroFoto=albumDelNodo.getFotos().getIndex(nodoClickeado.getContent())+1;  //LE SUMO UNO PORQUE ES INDICE
         int totalFotos=albumDelNodo.getFotos().size();
         lbNumFoto.setText(String.valueOf(numeroFoto)+"/"+String.valueOf(totalFotos));
+        lbNombreFoto.setText(nodoClickeado.getContent().getRuta().substring(0,nodoClickeado.getContent().getRuta().length()-4));
+        lbFechaFoto.setText(nodoClickeado.getContent().getFecha().toString());
         ivFotoCentral.setImage(i);
         // TODO
         //NECESITO VER COMO CONSEGUIR EL NODO Y EL ALBUM (TAL VEZ UN STRING CON: NOMBREALBUM;FOTO

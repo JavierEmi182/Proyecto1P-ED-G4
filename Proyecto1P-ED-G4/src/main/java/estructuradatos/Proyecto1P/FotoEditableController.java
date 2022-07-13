@@ -133,7 +133,7 @@ public class FotoEditableController implements Initializable {
 
     @FXML
     private void GuardarCambios(MouseEvent event) {
-        DoubleCircularLinkedList<String> nuevas_personas = new DoubleCircularLinkedList<>();
+       /* DoubleCircularLinkedList<String> nuevas_personas = new DoubleCircularLinkedList<>();
         if(!personasCB.getItems().isEmpty()){
             for(String s: personasCB.getItems()){
                 nuevas_personas.addFirst(s);
@@ -141,7 +141,7 @@ public class FotoEditableController implements Initializable {
         }
         for(String s:nuevas_personas){
             System.out.println(s);
-        }
+        }*/
         cargarVentanaAnterior(event);
     }
     
