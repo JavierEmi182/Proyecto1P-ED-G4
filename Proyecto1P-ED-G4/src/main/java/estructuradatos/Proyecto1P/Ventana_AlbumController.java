@@ -428,4 +428,15 @@ public class Ventana_AlbumController implements Initializable {
             root.autosize();
 
     }
+
+    @FXML
+    private void aplicarFiltro(ActionEvent event) {
+        cargarFotos(albumfiltrado);
+    }
+
+    @FXML
+    private void limpiarFiltro(ActionEvent event) {
+        albumfiltrado=album;
+        cargarFotos(albumfiltrado);
+    }
 }

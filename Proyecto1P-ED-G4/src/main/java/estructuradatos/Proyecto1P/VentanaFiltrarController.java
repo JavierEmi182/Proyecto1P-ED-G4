@@ -5,13 +5,21 @@
  */
 package estructuradatos.Proyecto1P;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -57,8 +65,24 @@ public class VentanaFiltrarController implements Initializable {
             //cargarFotos
         }
         System.out.println(Ventana_AlbumController.albumfiltrado);
-        
-        
+    }
+
+    @FXML
+    private void VolverVentanaAnterior(ActionEvent event) {
+        Node node = (Node)event.getSource();
+        Stage stage = (Stage)node.getScene().getWindow();
+        stage.close();
+        FXMLLoader f = new FXMLLoader(App.class.getResource("/fxml/Ventana_Album.fxml"));
+            Parent root;
+            try {
+                root = f.load();
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
+                root.autosize();
+            } catch (IOException ex) {
+                Logger.getLogger(Ventana_AlbumController.class.getName()).log(Level.SEVERE, null, ex);
+            }
     }
     
 }

@@ -40,7 +40,12 @@
                <children>
                   <Button fx:id="btnFiltrar" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#filtrarAlbum" prefHeight="30.0" prefWidth="68.0" text="Filtrar" textAlignment="CENTER">
                      <HBox.margin>
-                        <Insets left="200.0" top="15.0" />
+                        <Insets left="175.0" top="15.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#VolverVentanaAnterior" prefHeight="32.0" prefWidth="79.0" text="Volver">
+                     <HBox.margin>
+                        <Insets left="25.0" top="15.0" />
                      </HBox.margin>
                   </Button>
                </children>
