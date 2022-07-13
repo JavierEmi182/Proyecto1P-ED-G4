@@ -6,7 +6,13 @@ package estructuradatos.Proyecto1P;
 
 import Classes.Album;
 import Classes.Photo;
+import TDAs.ArrayList;
 import TDAs.DoubleCircularLinkedList;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -64,9 +70,9 @@ public class FotoEditableController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
 
-        Image i= new Image("file:recursos/fotos/"+Ventana_AlbumController.foto.getRuta());
+        Image i= new Image("file:recursos/fotos/"+VentanaVisualizacionController.fotoControlador.getRuta());
         ImgviewFoto.setImage(i);
-        personas = Ventana_AlbumController.foto.getPersonas();
+        personas = VentanaVisualizacionController.fotoControlador.getPersonas();
         int tamanio = personas.size();
         if(!personas.isEmpty()){
             for(String s:personas){
@@ -133,23 +139,19 @@ public class FotoEditableController implements Initializable {
 
     @FXML
     private void GuardarCambios(MouseEvent event) {
-       /* DoubleCircularLinkedList<String> nuevas_personas = new DoubleCircularLinkedList<>();
-        if(!personasCB.getItems().isEmpty()){
-            for(String s: personasCB.getItems()){
-                nuevas_personas.addFirst(s);
-            }
+        try {
+            GuardarCambiosFoto();
+            cargarVentanaAnterior(event);
+        } catch (IOException ex) {
+            Logger.getLogger(FotoEditableController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        for(String s:nuevas_personas){
-            System.out.println(s);
-        }*/
-        cargarVentanaAnterior(event);
     }
     
     public void cargarVentanaAnterior(MouseEvent event){
         Node node = (Node)event.getSource();
         Stage stage = (Stage)node.getScene().getWindow();
         stage.close();
-        FXMLLoader f = new FXMLLoader(App.class.getResource("/fxml/VentanaVisualizacion.fxml"));
+        FXMLLoader f = new FXMLLoader(App.class.getResource("/fxml/Ventana_Album.fxml"));
             Parent root;
             try {
                 root = f.load();
@@ -160,6 +162,95 @@ public class FotoEditableController implements Initializable {
             } catch (IOException ex) {
                 Logger.getLogger(Ventana_AlbumController.class.getName()).log(Level.SEVERE, null, ex);
             }
+    }
+    
+    private void GuardarCambiosFoto() throws IOException{
+        DoubleCircularLinkedList<String> nuevas_personas = new DoubleCircularLinkedList<>();
+        if(!personasCB.getItems().isEmpty()){
+            for(String s: personasCB.getItems()){
+                nuevas_personas.addFirst(s);
+            }
+        }
+        String nombrefoto = VentanaVisualizacionController.fotoControlador.getRuta();
+        ArrayList<String> nuevaslineastxt =new ArrayList<>();
+        String nuevosnom="";
+        for(String s:nuevas_personas){
+            nuevosnom+=s+"-";
+        }
+        String ruta = new URL("file:recursos/textos/fotosUsuario.txt").getFile();
+
+        try(BufferedReader bf= new BufferedReader(new FileReader(ruta))){
+            String linea;
+            //leer la linea hasta llegar al final
+            while((linea=bf.readLine()) !=null){
+                String linea2="";
+                String[] partes = linea.split(";");
+                if(partes[0].equals(nombrefoto)){
+                    partes[1]=nuevosnom;
+                }
+                for(int i=0;i<partes.length;i++){
+
+                    linea2+= partes[i]+";";
+
+                }
+                nuevaslineastxt.addFirst(linea2.substring(0, linea2.length()-1));
+                
+            }
+            bf.close();
+        }catch(FileNotFoundException ex){
+                    System.out.println(ex.getMessage());
+        }catch(IOException ex){
+            System.out.println(ex.getMessage());
+        }
+        
+        
+        try(BufferedWriter bf2= new BufferedWriter(new FileWriter(ruta))){
+            for(String s: nuevaslineastxt){
+                bf2.write(s);
+                bf2.newLine();
+            }
+            bf2.close();
+        }
+    }
+    
+    public void DeletePhoto() throws IOException{
+        String nombrefoto = VentanaVisualizacionController.fotoControlador.getRuta();
+        ArrayList<String> nuevaslineastxt =new ArrayList<>();
+        String ruta = new URL("file:recursos/textos/fotosUsuario.txt").getFile();
+
+        try(BufferedReader bf= new BufferedReader(new FileReader(ruta))){
+            String linea;
+            //leer la linea hasta llegar al final
+            while((linea=bf.readLine()) !=null){
+                String linea2="";
+                String[] partes = linea.split(";");
+                if(partes[0].equals(nombrefoto)){
+                    partes[1]="hola";
+                }
+                for(int i=0;i<partes.length;i++){
+
+                    linea2+= partes[i]+";";
+
+                }
+                nuevaslineastxt.addFirst(linea2.substring(0, linea2.length()-1));
+                
+            }
+            bf.close();
+        }catch(FileNotFoundException ex){
+                    System.out.println(ex.getMessage());
+        }catch(IOException ex){
+            System.out.println(ex.getMessage());
+        }
+        
+        
+        try(BufferedWriter bf2= new BufferedWriter(new FileWriter(ruta))){
+            for(String s: nuevaslineastxt){
+                bf2.write(s);
+                bf2.newLine();
+            }
+            bf2.close();
+        }
+        
     }
     
 }

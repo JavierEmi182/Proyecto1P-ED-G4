@@ -53,7 +53,9 @@ public class VentanaVisualizacionController implements Initializable {
     @FXML
     private Button btnSiguiente;
     
-    NodeList<Photo> nodoClickeado;
+     NodeList<Photo> nodoClickeado;
+     public static Photo fotoControlador;
+
     Album albumDelNodo;
     @FXML
     private AnchorPane raiz;
@@ -66,6 +68,7 @@ public class VentanaVisualizacionController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        fotoControlador=Ventana_AlbumController.foto;
         Image i = new Image("file:recursos/fotos/"+Ventana_AlbumController.foto.getRuta());
         albumDelNodo=Ventana_AlbumController.album;
         System.out.println(albumDelNodo);
@@ -131,12 +134,14 @@ public class VentanaVisualizacionController implements Initializable {
 
     @FXML
     private void anteriorFoto(ActionEvent event) {
+        fotoControlador=nodoClickeado.getPrevious().getContent();
         actualizarDatos(nodoClickeado.getPrevious());
         
     }
 
     @FXML
     private void siguienteFoto(ActionEvent event) {
+        fotoControlador=nodoClickeado.getNext().getContent();
         actualizarDatos(nodoClickeado.getNext());
     }
     
