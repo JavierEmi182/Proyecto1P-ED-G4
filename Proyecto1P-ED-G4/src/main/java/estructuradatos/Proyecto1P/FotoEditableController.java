@@ -192,7 +192,7 @@ public class FotoEditableController implements Initializable {
                 String linea2="";
                 String[] partes = linea.split(";");
                 if(partes[0].equals(nombrefoto)){
-                    partes[1]=nuevosnom;
+                    partes[1]=nuevosnom.substring(0,nuevosnom.length() -1);
                 }
                 for(int i=0;i<partes.length;i++){
 

@@ -5,6 +5,7 @@
  */
 package estructuradatos.Proyecto1P;
 
+import Classes.Album;
 import Classes.Photo;
 import TDAs.DoubleCircularLinkedList;
 import java.io.IOException;
@@ -38,6 +39,8 @@ public class VentanaFiltrarController implements Initializable {
     private Button btnFiltrar;
     
     public static DoubleCircularLinkedList<Photo> fotosFiltradas;
+    
+    Album albumprueba= new Album("prueba","prueba");
 
     /**
      * Initializes the controller class.
@@ -64,13 +67,17 @@ public class VentanaFiltrarController implements Initializable {
         //Ventana_AlbumController.albumfiltrado.setFotos(Ventana_AlbumController.albumfiltrado.filtrarPorLugar(tfLugar.getText()));
             fotosFiltradas=Ventana_AlbumController.albumfiltrado.filtrarPorLugar(tfLugar.getText());
         }
+        //PROBAR FILTRAR LOS DOS
+        albumprueba.setFotos(fotosFiltradas);
         //if(tfPersonas.getText()!=null){
         if(!tfPersonas.getText().trim().isEmpty()){
             //System.out.println(tfPersonas.getText().trim().isEmpty());
             String[] personas=tfPersonas.getText().split(",");
             for(String p:personas){
                 //Ventana_AlbumController.albumfiltrado.setFotos(Ventana_AlbumController.albumfiltrado.filtrarPorPersona(p));
-                fotosFiltradas=Ventana_AlbumController.albumfiltrado.filtrarPorPersona(p);
+                //fotosFiltradas=Ventana_AlbumController.albumfiltrado.filtrarPorPersona(p);
+                //PROBAR FILTRAR LOS DOS
+                fotosFiltradas=albumprueba.filtrarPorPersona(p);
             }
             //cargarFotos
         }

@@ -6,6 +6,7 @@
 package Classes;
 
 import Classes.Photo;
+import TDAs.ArrayListPrueba;
 import TDAs.DoubleCircularLinkedList;
 import java.time.LocalDate;
 import java.util.LinkedHashMap;
@@ -111,7 +112,8 @@ public class Album {
             if(f.getLugar()!=null){
             fotosPorLugar.putIfAbsent(f.getLugar(), new DoubleCircularLinkedList<Photo>(f));
             fotosPorLugar.get(f.getLugar()).addFirst(f);
-        }}
+            }
+        }
         
         return fotosPorLugar.get(lugar);
     }
@@ -147,18 +149,69 @@ public class Album {
     }
     
     //entrando un string
+    //METODO CON ARRAYLIST
+    /*public ArrayListPrueba<Photo> filtrarPorPersona(String persona){
+        int i=1;
+        Map<String,ArrayListPrueba<Photo>> fotosPorPersona=new LinkedHashMap<>();
+        for(Photo f:this.getFotos()){
+            
+            //System.out.println("Estoy en foto "+f+" "+i+"/"+this.getFotos().size());
+            //System.out.println(f.getPersonas());
+            if(!f.getPersonas().isEmpty()){
+                for(String p:f.getPersonas()){
+                    //System.out.println("Encontre a: "+p+ " En foto: "+f);
+                    fotosPorPersona.putIfAbsent(p, new ArrayListPrueba<Photo>(f));
+                    if(!fotosPorPersona.get(p).isEmpty()){
+                    fotosPorPersona.get(p).addFirst(f);
+                    }
+                    //fotosPorPersona.get(p).addLast(f);}
+                    System.out.println(fotosPorPersona);
+                }
+            }
+            i++;
+        }
+        System.out.println("dicccionario final: "+ fotosPorPersona.get(persona));
+        return fotosPorPersona.get(persona);
+    }*/
+    
     public DoubleCircularLinkedList<Photo> filtrarPorPersona(String persona){
+        int i=1;
         Map<String,DoubleCircularLinkedList<Photo>> fotosPorPersona=new LinkedHashMap<>();
         for(Photo f:this.getFotos()){
-            for(String p:f.getPersonas()){
-                fotosPorPersona.putIfAbsent(p, new DoubleCircularLinkedList<Photo>(f));
-                fotosPorPersona.get(p).addFirst(f);
-            }
             
+            System.out.println("Estoy en foto "+f+" "+i+"/"+this.getFotos().size());
+            //System.out.println(f.getPersonas());
+            if(!f.getPersonas().isEmpty()){
+                for(String p:f.getPersonas()){
+                    System.out.println("Encontre a: "+p+ " En foto: "+f);
+                    fotosPorPersona.putIfAbsent(p, new DoubleCircularLinkedList<Photo>(f));
+                    fotosPorPersona.get(p).addFirst(f);
+                    //fotosPorPersona.get(p).addLast(f);
+                    System.out.println(fotosPorPersona);
+                }
+            }
+            i++;
         }
-        
+        System.out.println("dicccionario final: "+ fotosPorPersona.get(persona));
         return fotosPorPersona.get(persona);
     }
+    /*
+    public DoubleCircularLinkedList<Photo> filtrarPorLugar(String lugar){
+        Map<String,DoubleCircularLinkedList<Photo>> fotosPorLugar=new LinkedHashMap<>();
+        for(Photo f:this.getFotos()){
+            if(f.getLugar()!=null){
+            fotosPorLugar.putIfAbsent(f.getLugar(), new DoubleCircularLinkedList<Photo>(f));
+            fotosPorLugar.get(f.getLugar()).addFirst(f);
+            }
+        }
+        
+        return fotosPorLugar.get(lugar);
+    }
+    */
+    
+    /*
+    ArrayListPrueba
+    */
     
     public Map<String,Integer> contadorPorPersona(String lugar){
         Map<String,Integer> contadorPorPersona=new LinkedHashMap<>();
